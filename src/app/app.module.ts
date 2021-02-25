@@ -25,7 +25,7 @@ import { AppService } from './app.service';
 import { AppInterceptor } from './theme/utils/app-interceptor';
 import { OptionsComponent } from './theme/components/options/options.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 
 @NgModule({
