@@ -23,6 +23,8 @@ export const routes = [
           { path: 'addresses', component: AddressesComponent, data: {  breadcrumb: 'Addresses' } },
           { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' } },
           { path: 'admin', component: AdminComponent, data: {  breadcrumb: 'admin' } },
+          { path: 'addProduct', component: AddProductComponent, data: {  breadcrumb: 'addProduct' } },
+
       ]
   }
 ];
