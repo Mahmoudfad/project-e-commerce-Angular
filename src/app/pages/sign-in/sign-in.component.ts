@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { emailValidator, matchingPasswords } from '../../theme/utils/app-validators';
 import { AuthService } from 'src/app/services/auth.service';
 
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -35,15 +36,17 @@ export class SignInComponent implements OnInit {
   public onLoginFormSubmit(values:Object):void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe((res)=>{
-        localStorage.setItem('connectedUser',JSON.stringify(res))
-      },
-      err=>{
-        this.snackBar.open('verif pass', '×', { panelClass: 'warn', verticalPosition: 'top', duration: 3000 });
-        this.ngOnInit()
-      },
-      ()=> {
+       if(JSON.parse(JSON.stringify(res)).message=='Auth failed'){
+        this.snackBar.open('verif pass or email', '×', { panelClass: 'warn', verticalPosition: 'top', duration: 3000 });
+       
+       }
+       else{
+        localStorage.setItem('connectedUser',JSON.stringify(res));
         this.router.navigateByUrl('/')
-      } )
+       }
+        
+      
+      })
     }
    
   }
