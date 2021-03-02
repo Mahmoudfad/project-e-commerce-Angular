@@ -19,4 +19,7 @@ export class AuthService {
   {
     return this.http.post( this.baseURL + '/users/userCreate',data)
   }
+  // getUsers(data){
+  //   return this.http.get( this.baseURL + '/users/userCreate',data)
+  // }
 }

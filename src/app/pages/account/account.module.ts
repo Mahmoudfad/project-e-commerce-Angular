@@ -8,6 +8,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InformationComponent } from './information/information.component';
 import { AddressesComponent } from './addresses/addresses.component';
 import { OrdersComponent } from './orders/orders.component';
+import { AdminComponent } from './admin/admin.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
+import { ListProductComponent } from './list-product/list-product.component';
 
 export const routes = [
   { 
@@ -17,7 +21,10 @@ export const routes = [
           { path: 'dashboard', component: DashboardComponent, data: {  breadcrumb: 'Dashboard' } },
           { path: 'information', component: InformationComponent, data: {  breadcrumb: 'Information' } },
           { path: 'addresses', component: AddressesComponent, data: {  breadcrumb: 'Addresses' } },
-          { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' } }
+          { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' } },
+          { path: 'admin', component: AdminComponent, data: {  breadcrumb: 'admin' } },
+          { path: 'addProduct', component: AddProductComponent, data: {  breadcrumb: 'addProduct' } },
+
       ]
   }
 ];
@@ -34,7 +41,11 @@ export const routes = [
     DashboardComponent,
     InformationComponent,
     AddressesComponent,
-    OrdersComponent
+    OrdersComponent,
+    AdminComponent,
+    AddProductComponent,
+    UpdateProductComponent,
+    ListProductComponent    
   ]
 })
 export class AccountModule { }

@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { emailValidator, matchingPasswords } from '../../theme/utils/app-validators';
 import { AuthService } from 'src/app/services/auth.service';
 
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -35,19 +36,32 @@ export class SignInComponent implements OnInit {
   public onLoginFormSubmit(values:Object):void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe((res)=>{
-        this.router.navigate(['/']);
+       if(JSON.parse(JSON.stringify(res)).message=='Auth failed'){
+        this.snackBar.open('verif pass or email', '×', { panelClass: 'warn', verticalPosition: 'top', duration: 3000 });
+       
+       }
+       else{
+        localStorage.setItem('connectedUser',JSON.stringify(res));
+        this.router.navigateByUrl('/')
+       }
+        
+      
       })
     }
+   
   }
 
 
 
   public onRegisterFormSubmit(values:Object):void {
-    if (this.registerForm.valid) {
+    if (this.registerForm.valid && this.registerForm.controls.password.value==this.registerForm.controls.confirmPassword.value) {
       this.authService.register(this.registerForm.value).subscribe((res)=>{
         this.snackBar.open('You registered successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
       })
       
+    }
+    else {
+      this.snackBar.open("Password and confirm password don't match!", '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
     }
   }
 
