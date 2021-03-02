@@ -35,19 +35,30 @@ export class SignInComponent implements OnInit {
   public onLoginFormSubmit(values:Object):void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe((res)=>{
-        this.router.navigate(['/']);
-      })
+        localStorage.setItem('connectedUser',JSON.stringify(res))
+      },
+      err=>{
+        this.snackBar.open('verif pass', '×', { panelClass: 'warn', verticalPosition: 'top', duration: 3000 });
+        this.ngOnInit()
+      },
+      ()=> {
+        this.router.navigateByUrl('/')
+      } )
     }
+   
   }
 
 
 
   public onRegisterFormSubmit(values:Object):void {
-    if (this.registerForm.valid) {
+    if (this.registerForm.valid && this.registerForm.controls.password.value==this.registerForm.controls.confirmPassword.value) {
       this.authService.register(this.registerForm.value).subscribe((res)=>{
         this.snackBar.open('You registered successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
       })
       
+    }
+    else {
+      this.snackBar.open("Password and confirm password don't match!", '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
     }
   }
 
