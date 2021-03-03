@@ -25,6 +25,8 @@ import { AppService } from './app.service';
 import { AppInterceptor } from './theme/utils/app-interceptor';
 import { OptionsComponent } from './theme/components/options/options.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 @NgModule({
    imports: [
@@ -32,6 +34,7 @@ import { FooterComponent } from './theme/components/footer/footer.component';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxSpinnerModule,
+    NgxDropzoneModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDLf9Ywk47zipEtorDewwMmB3JtuXdzYL4'
     }),

@@ -12,6 +12,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { ListProductComponent } from './list-product/list-product.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 export const routes = [
   { 
@@ -34,7 +35,8 @@ export const routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxDropzoneModule
   ],
   declarations: [
     AccountComponent,
