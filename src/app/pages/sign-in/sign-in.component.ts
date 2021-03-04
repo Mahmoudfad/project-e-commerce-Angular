@@ -58,7 +58,7 @@ export class SignInComponent implements OnInit {
       this.authService.register(this.registerForm.value).subscribe((res)=>{
         this.snackBar.open('You registered successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
       })
-      
+     
     }
     else {
       this.snackBar.open("Password and confirm password don't match!", '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
