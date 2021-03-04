@@ -21,3 +21,7 @@ export const routes = [
   ]
 })
 export class SignInModule { }
+
+
+// this.productService.getAllProducts().subscribe(data=>{
+//   this.products = data; 

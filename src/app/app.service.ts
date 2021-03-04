@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { Category, Product } from './app.models';
+import { environment } from 'src/environments/environment';
 
 export class Data {
     constructor(public categories: Category[],
@@ -24,14 +25,18 @@ export class AppService {
         0 //totalCartCount
     )
     public url = "assets/data/";
+    baseURL= environment.baseURL
+
     constructor(public http:HttpClient, public snackBar: MatSnackBar) { }
     
     public getCategories(): Observable<Category[]>{
         return this.http.get<Category[]>(this.url + 'categories.json');
     }
    
-    public getProducts(type): Observable<Product[]>{        
-        return this.http.get<Product[]>(this.url + type + '-products.json');
+    public getProducts(){        
+        // return this.http.get<Product[]>(this.url + type + '-products.json');
+        return this.http.get(this.baseURL + '/products/getAllProducts')
+
     }
 
     public getProductById(id): Observable<Product>{
