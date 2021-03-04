@@ -28,6 +28,7 @@ import { FooterComponent } from './theme/components/footer/footer.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
+
 @NgModule({
    imports: [
     BrowserModule,
@@ -50,7 +51,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     SidenavMenuComponent,
     BreadcrumbComponent,
     OptionsComponent,
-    FooterComponent
+    FooterComponent,
   ], 
   providers: [
     AppSettings,

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-list-product',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-product.component.scss']
 })
 export class ListProductComponent implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

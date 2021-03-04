@@ -14,6 +14,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
 import { ListProductComponent } from './list-product/list-product.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
+
 export const routes = [
   { 
       path: '', 
@@ -25,7 +26,7 @@ export const routes = [
           { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' } },
           { path: 'admin', component: AdminComponent, data: {  breadcrumb: 'admin' } },
           { path: 'addProduct', component: AddProductComponent, data: {  breadcrumb: 'addProduct' } },
-
+          { path:'listProduct',component:ListProductComponent,data:{breadcrumb:'listProduct'} },
       ]
   }
 ];
@@ -47,7 +48,8 @@ export const routes = [
     AdminComponent,
     AddProductComponent,
     UpdateProductComponent,
-    ListProductComponent    
+    ListProductComponent,
+    
   ]
 })
 export class AccountModule { }

@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
   public zoomImage: any;
   private sub: any;
   public form: FormGroup;
-  public relatedProducts: Array<Product>;
+  public relatedProducts: Array<any>;
 
   constructor(public appService:AppService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public formBuilder: FormBuilder) {  }
 
@@ -73,8 +73,8 @@ export class ProductComponent implements OnInit {
   }
 
   public getRelatedProducts(){
-    this.appService.getProducts('related').subscribe(data => {
-      this.relatedProducts = data;
+    this.appService.getProducts().subscribe(data => {
+      this.relatedProducts.push(data) ;
     })
   }
 
