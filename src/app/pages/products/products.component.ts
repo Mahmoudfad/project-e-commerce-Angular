@@ -5,6 +5,7 @@ import { ProductDialogComponent } from '../../shared/products-carousel/product-d
 import { AppService } from '../../app.service';
 import { Product, Category } from "../../app.models";
 import { Settings, AppSettings } from 'src/app/app.settings';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,7 @@ export class ProductsComponent implements OnInit {
   public count:any;
   public sortings = ['Sort by Default', 'Best match', 'Lowest first', 'Highest first'];
   public sort:any;
-  public products: Array<Product> = [];
+  public products = [] as any
   public categories:Category[];
   public brands = [];
   public priceFrom: number = 750;
@@ -69,8 +70,11 @@ export class ProductsComponent implements OnInit {
               private router: Router) {
     this.settings = this.appSettings.settings;
   }
+  baseURL= environment.baseURL
+
 
   ngOnInit() {
+
     this.count = this.counts[0];
     this.sort = this.sortings[0];
     this.sub = this.activatedRoute.params.subscribe(params => {
@@ -89,8 +93,10 @@ export class ProductsComponent implements OnInit {
   }
 
   public getAllProducts(){
-    this.appService.getProducts("featured").subscribe(data=>{
+    this.appService.getProducts().subscribe(data=>{
       this.products = data; 
+      console.log(this.products);
+      
       //for show more product  
       for (var index = 0; index < 3; index++) {
         this.products = this.products.concat(this.products);        

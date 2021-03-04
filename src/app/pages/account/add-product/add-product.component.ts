@@ -44,13 +44,15 @@ onRemove(event) {
       });
   }
 
-
+sq : any
   addSizeQuantity(){
-    const sq = this.productForm.controls.sizesQuantity as FormArray
-     sq.push(  new FormGroup({
+     this.sq = this.productForm.controls.sizesQuantity as FormArray
+     this.sq.push(  new FormGroup({
       size : new FormControl(),
       quantity : new FormControl()
     })) 
+
+    console.log(this.productForm.get('sizesQuantity').value);
   }
 
 
@@ -60,6 +62,8 @@ onRemove(event) {
     console.log(data);
     
     const formData = new FormData();
+
+    
   
     formData.set('productName', this.productForm.get('productName').value);
     formData.set('gender', this.productForm.get('gender').value);
@@ -67,7 +71,7 @@ onRemove(event) {
     formData.set('topProduct', this.productForm.get('topProduct').value);
     formData.set('description', this.productForm.get('description').value);
     formData.set('price', this.productForm.get('price').value);
-    formData.set('sizesQuantity', this.productForm.get('sizesQuantity').value);
+    formData.set('sizesQuantity', JSON.stringify(this.productForm.get('sizesQuantity').value));
    this.files.forEach(image=>{
     formData.append('image', image);
    })
