@@ -35,7 +35,7 @@ export class ProductComponent implements OnInit {
       'name': [null, Validators.compose([Validators.required, Validators.minLength(4)])],
       'email': [null, Validators.compose([Validators.required, emailValidator])]
     }); 
-    this.getRelatedProducts();    
+    // this.getRelatedProducts();    
   }
 
   ngAfterViewInit(){
@@ -72,11 +72,11 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  public getRelatedProducts(){
-    this.appService.getProducts('related').subscribe(data => {
-      this.relatedProducts = data;
-    })
-  }
+  // public getRelatedProducts(){
+  //   this.appService.getProducts('related').subscribe(data => {
+  //     this.relatedProducts = data;
+  //   })
+  // }
 
   public selectImage(image){
     this.image = image.medium;
