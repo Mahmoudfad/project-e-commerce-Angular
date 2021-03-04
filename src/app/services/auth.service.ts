@@ -19,6 +19,11 @@ export class AuthService {
   {
     return this.http.post( this.baseURL + '/users/userCreate',data)
   }
+
+  registerMail(user)
+  {
+    return this.http.get( this.baseURL + '/email/register/'+ user.id)
+  }
   // getUsers(data){
   //   return this.http.get( this.baseURL + '/users/userCreate',data)
   // }
