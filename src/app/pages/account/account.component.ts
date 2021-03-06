@@ -12,7 +12,7 @@ export class AccountComponent implements OnInit {
   public links = [
     { name: 'Add product', href: 'addProduct', icon: 'dashboard' },
     { name: 'All products', href: 'listProduct', icon: 'info' },
-    { name: 'Addresses', href: 'addresses', icon: 'location_on' },
+    { name: 'Contacts', href: 'contacts', icon: 'location_on' },
     { name: 'Order History', href: 'orders', icon: 'add_shopping_cart' },  
     { name: 'Logout', href: '/sign-in', icon: 'power_settings_new' },    
   ];

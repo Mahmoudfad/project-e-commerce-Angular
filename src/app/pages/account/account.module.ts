@@ -13,6 +13,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { ListProductComponent } from './list-product/list-product.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ContactsComponent } from './contacts/contacts.component';
 
 
 export const routes = [
@@ -27,6 +28,8 @@ export const routes = [
           { path: 'admin', component: AdminComponent, data: {  breadcrumb: 'admin' } },
           { path: 'addProduct', component: AddProductComponent, data: {  breadcrumb: 'addProduct' } },
           { path:'listProduct',component:ListProductComponent,data:{breadcrumb:'listProduct'} },
+          { path:'contacts',component:ContactsComponent,data:{breadcrumb:'contacts'} },
+
       ]
   }
 ];
@@ -49,6 +52,7 @@ export const routes = [
     AddProductComponent,
     UpdateProductComponent,
     ListProductComponent,
+    ContactsComponent,
     
   ]
 })
