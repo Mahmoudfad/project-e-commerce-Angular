@@ -28,47 +28,47 @@ export class HomeComponent implements OnInit {
   constructor(public appService:AppService) { }
 
   ngOnInit() {
-    this.getBanners();
-    this.getProducts("featured");
-    this.getBrands();
+    // this.getBanners();
+    // this.getProducts("featured");
+    // this.getBrands();
   }
 
-  public onLinkClick(e){
-    this.getProducts(e.tab.textLabel.toLowerCase()); 
-  }
+  // public onLinkClick(e){
+  //   this.getProducts(e.tab.textLabel.toLowerCase()); 
+  // }
 
-  public getProducts(type){
-    if(type == "featured" && !this.featuredProducts){
-      this.appService.getProducts("featured").subscribe(data=>{
-        this.featuredProducts = data;      
-      }) 
-    }
-    if(type == "on sale" && !this.onSaleProducts){
-      this.appService.getProducts("on-sale").subscribe(data=>{
-        this.onSaleProducts = data;      
-      })
-    }
-    if(type == "top rated" && !this.topRatedProducts){
-      this.appService.getProducts("top-rated").subscribe(data=>{
-        this.topRatedProducts = data;      
-      })
-    }
-    if(type == "new arrivals" && !this.newArrivalsProducts){
-      this.appService.getProducts("new-arrivals").subscribe(data=>{
-        this.newArrivalsProducts = data;      
-      })
-    }
+  // public getProducts(type){
+  //   if(type == "featured" && !this.featuredProducts){
+  //     this.appService.getProducts("featured").subscribe(data=>{
+  //       this.featuredProducts = data;      
+  //     }) 
+    // }
+    // if(type == "on sale" && !this.onSaleProducts){
+    //   this.appService.getProducts("on-sale").subscribe(data=>{
+    //     this.onSaleProducts = data;      
+    //   })
+  //   }
+  //   if(type == "top rated" && !this.topRatedProducts){
+  //     this.appService.getProducts("top-rated").subscribe(data=>{
+  //       this.topRatedProducts = data;      
+  //     })
+  //   }
+  //   if(type == "new arrivals" && !this.newArrivalsProducts){
+  //     this.appService.getProducts("new-arrivals").subscribe(data=>{
+  //       this.newArrivalsProducts = data;      
+  //     })
+  //   }
    
-  }
+  // }
 
-  public getBanners(){
-    this.appService.getBanners().subscribe(data=>{
-      this.banners = data;
-    })
-  }
+  // public getBanners(){
+  //   this.appService.getBanners().subscribe(data=>{
+  //     this.banners = data;
+  //   })
+  // }
 
-  public getBrands(){
-    this.brands = this.appService.getBrands();
-  }
+  // public getBrands(){
+  //   this.brands = this.appService.getBrands();
+  // }
 
 }

@@ -14,7 +14,5 @@ export class ProductService {
   {
     return this.http.post( this.baseURL + '/products/addProduct',data)
   }
-  getAllProducts(){
-    return this.http.get(this.baseURL + '/products/getAllProducts')
-  }
+  
 }

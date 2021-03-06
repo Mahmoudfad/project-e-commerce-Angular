@@ -10,9 +10,9 @@ export class AccountComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) sidenav: any;
   public sidenavOpen:boolean = true;
   public links = [
-    { name: 'Account Dashboard', href: 'dashboard', icon: 'dashboard' },
-    { name: 'Account Information', href: 'information', icon: 'info' },
-    { name: 'Addresses', href: 'addresses', icon: 'location_on' },
+    { name: 'Add product', href: 'addProduct', icon: 'dashboard' },
+    { name: 'All products', href: 'listProduct', icon: 'info' },
+    { name: 'Contacts', href: 'contacts', icon: 'location_on' },
     { name: 'Order History', href: 'orders', icon: 'add_shopping_cart' },  
     { name: 'Logout', href: '/sign-in', icon: 'power_settings_new' },    
   ];
