@@ -52,18 +52,18 @@ export class BrandComponent implements OnInit {
     };
 
     this.getCategories();
-    this.getAllProducts();  
+    // this.getAllProducts();  
   }
 
-  public getAllProducts(){
-    this.appService.getProducts("brand").subscribe(data=>{
-      this.products = data; 
-      //for show more product  
-      for (var index = 0; index < 3; index++) {
-        this.products = this.products.concat(this.products);        
-      }
-    });
-  }
+  // public getAllProducts(){
+  //   this.appService.getProducts("brand").subscribe(data=>{
+  //     this.products = data; 
+  //     //for show more product  
+  //     for (var index = 0; index < 3; index++) {
+  //       this.products = this.products.concat(this.products);        
+  //     }
+  //   });
+  // }
 
   public getCategories(){  
     if(this.appService.Data.categories.length == 0) { 
@@ -89,7 +89,7 @@ export class BrandComponent implements OnInit {
 
   public changeCount(count){
     this.count = count;
-    this.getAllProducts(); 
+    // this.getAllProducts(); 
   }
 
   public changeSorting(sort){
@@ -116,7 +116,7 @@ export class BrandComponent implements OnInit {
 
   public onPageChanged(event){
       this.page = event;
-      this.getAllProducts(); 
+      // this.getAllProducts(); 
       window.scrollTo(0,0); 
   }
 

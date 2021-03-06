@@ -97,6 +97,7 @@ export class ProductsComponent implements OnInit {
       this.products = data; 
       console.log(this.products);
       
+      
       //for show more product  
       for (var index = 0; index < 3; index++) {
         this.products = this.products.concat(this.products);        
