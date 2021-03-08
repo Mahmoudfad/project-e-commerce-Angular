@@ -39,8 +39,9 @@ export class AppService {
 
     }
 
-    public getProductById(id): Observable<Product>{
-        return this.http.get<Product>(this.url + 'product-' + id + '.json');
+    public getProductById(id){
+        return this.http.get(this.baseURL + '/products/getProduct/' + id);
+        
     }
 
     public getBanners(): Observable<any[]>{
