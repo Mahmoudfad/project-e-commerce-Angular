@@ -14,5 +14,9 @@ contactAdmin(data)
   {
     return this.http.post( this.baseURL + '/users/contact',data)
   }
+   getAllContacts()
+  {         
+    return this.http.get(this.baseURL + '/users/getAllContacts')
+  } 
 
 }
