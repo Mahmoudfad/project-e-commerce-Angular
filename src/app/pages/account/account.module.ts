@@ -14,7 +14,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
 import { ListProductComponent } from './list-product/list-product.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ContactsComponent } from './contacts/contacts.component';
-
+import {MatBadgeModule} from '@angular/material/badge';
 
 export const routes = [
   { 
@@ -40,7 +40,8 @@ export const routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     SharedModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatBadgeModule
   ],
   declarations: [
     AccountComponent,

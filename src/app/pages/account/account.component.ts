@@ -11,10 +11,10 @@ export class AccountComponent implements OnInit {
   public sidenavOpen:boolean = true;
   public links = [
     { name: 'Add product', href: 'addProduct', icon: 'dashboard' },
-    { name: 'All products', href: 'listProduct', icon: 'info' },
-    { name: 'Contacts', href: 'contacts', icon: 'location_on' },
-    { name: 'Order History', href: 'orders', icon: 'add_shopping_cart' },  
-    { name: 'Logout', href: '/sign-in', icon: 'power_settings_new' },    
+    { name: 'All products', href: 'listProduct', icon: 'info'},
+    { name: 'Contacts', href: 'contacts', icon: 'location_on',nbrNotif:0 },
+    { name: 'Order History', href: 'orders', icon: 'add_shopping_cart'},  
+    { name: 'Logout', href: '/sign-in', icon: 'power_settings_new'},    
   ];
   constructor(public router:Router) { }
 
@@ -22,6 +22,7 @@ export class AccountComponent implements OnInit {
     if(window.innerWidth < 960){
       this.sidenavOpen = false;
     };
+
   }
 
   @HostListener('window:resize')
