@@ -6,7 +6,9 @@
         <th scope="col">Name</th>
         <th scope="col">Phone</th>
         <th scope="col">Email</th>
+        <th scope="col">Seen</th>
         <th scope="col">details</th>
+
 
       </tr>
     </thead>
@@ -16,6 +18,11 @@
         <td>{{contact.name}}</td>
         <td>{{contact.phone}}</td>
         <td>{{contact.email}} </td>
+        <td >
+          <span *ngIf="contact.status==true"><mat-icon>done_outline</mat-icon></span>
+          
+        </td>
+
         <td class="p-1 actions" >          
             <button mat-mini-fab color="primary" matTooltip="View" (click)="openDialog(contact,contact._id)" > 
                 <mat-icon >remove_red_eye</mat-icon>
