@@ -12,31 +12,33 @@
         <div class="small-carousel"> 
             <div class="swiper-container" [swiper]="config">
                 <div class="swiper-wrapper"> 
-                    <div *ngFor="let image of product?.images" class="swiper-slide">
+                    <!-- <div *ngFor="let image of product?.images" class="swiper-slide">
                         <mat-card (click)="selectImage(image)" class="p-1">
                             <img [attr.data-src]="image.small" class="swiper-lazy"/>
                             <div class="swiper-lazy-preloader"></div>
                         </mat-card>
-                    </div>                    
+                    </div>                     -->
+                    <img [src]="'http://localhost:3000/' + product.imageProduct"  alt="" >
                 </div>
                 <button mat-icon-button class="swiper-button-prev swipe-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
                 <button mat-icon-button class="swiper-button-next swipe-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button> 
             </div>
         </div>
 
-
-    </div>
+    </div> 
     <div fxFlex="100" fxFlex.gt-md="45" fxFlex.md="55" ngClass.gt-sm="px-3 m-0" ngClass.sm="mt-2" ngClass.xs="mt-2">
         
         <div #zoomViewer fxShow="false" fxShow.gt-md>
             <mat-card *ngIf="zoomImage" class="zoom-viewer mat-elevation-z18" [ngStyle]="{'background-image': 'url(' + zoomImage + ')'}"></mat-card>
         </div>
 
-        <h2>{{product?.name}}</h2>
-        <div class="py-1 lh">
-            <p><span class="text-muted fw-500">Category: </span><span>{{ ( appService.Data.categories | filterById : product?.categoryId )?.name }}</span></p>
-            <p><span class="text-muted fw-500">Availibility: </span><span>{{ (product?.availibilityCount > 0) ? 'In stock':'Unavailable'}}</span></p>
-        </div>                 
+        <h2>{{product?.productName}}</h2>
+        <div class="py-1 lh" >
+            <p><span class="text-muted fw-500">Categorie :</span><span>{{product?.categorie}}</span></p>
+            <div *ngFor="let element of product.sizesQuantity">
+            <p><span class="text-muted fw-500">Availibility :</span><span>{{element.size}}</span></p>
+        </div>
+        </div>                  
         <div class="py-1">
             <app-rating [ratingsCount]="product?.ratingsCount" [ratingsValue]="product?.ratingsValue" [direction]="'row'"></app-rating>
         </div>
@@ -45,17 +47,17 @@
         <div class="divider mt-1"></div>
         <div class="py-2">
             <h3 class="old-price text-muted"><span *ngIf="product?.oldPrice">${{product?.oldPrice | number : '1.2-2'}}</span></h3>
-            <h2 class="new-price">${{product?.newPrice}}</h2>
-        </div>        
+            <h2 class="new-price">${{product?.price}}</h2>
+        </div>         
 
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1">
+         <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="details text-muted py-1">
             <div *ngIf="product?.color" class="color">
                 <span class="fw-500">Select Color:</span>
                 <button mat-raised-button *ngFor="let color of product?.color" [style.background]="color">&nbsp;</button>              
             </div>
-            <div *ngIf="product?.size" class="size" ngClass.xs="mt-1">
+            <div *ngIf="product?.sizesQuantity" class="size" ngClass.xs="mt-1">
                 <span class="fw-500">Select Size:</span>
-                <button mat-raised-button *ngFor="let size of product?.size">{{size}}</button>
+                <button mat-raised-button *ngFor="let size of product?.sizesQuantity">{{size.size}}</button>
             </div>
         </div>
 
@@ -112,7 +114,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 </div>
 
 <div fxLayout="row wrap" class="mt-2">
@@ -138,7 +140,7 @@
                     <div class="full-desc lh">
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         <ul class="px-2 mt-1">
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                            <li>aaaa ipsum dolor sit amet, consectetur adipiscing elit.</li>
                             <li>Aenean vehicula, tortor gravida elementum tincidunt, justo lorem vestibulum ex, eget egestas arcu tellus in magna. Vivamus gravida, ipsum vel luctus luctus, nisi felis vestibulum est, nec interdum tellus leo quis tellus. Sed sit amet convallis enim, in laoreet orci.</li>
                             <li>Donec et elit at nulla congue interdum sit amet varius erat.</li>
                             <li>Nulla sit amet risus pellentesque, dignissim massa ut, dignissim arcu.</li>

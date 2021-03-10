@@ -18,10 +18,10 @@ this.http.getProducts().subscribe((res: any)=>{this.ListProducts=res},
 ()=>console.log(this.ListProducts));
 
   }
-delete(Product_id){
-  console.log(Product_id);
+// delete(Product_id){
+//   console.log(Product_id);
   
-this.http.deleteProduct(Product_id).subscribe((r:any)=>{},err=>{},()=>{console.log(Product_id);
-})
-}
+// this.http.deleteProduct(Product_id).subscribe((r:any)=>{},err=>{},()=>{console.log(Product_id);
+// })
+// }
 }

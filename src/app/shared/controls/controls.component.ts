@@ -18,6 +18,8 @@ export class ControlsComponent implements OnInit {
   constructor(public appService:AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
+  
+    
     if(this.product){
       if(this.product.cartCount > 0){
         this.count = this.product.cartCount;
@@ -76,7 +78,9 @@ export class ControlsComponent implements OnInit {
   }
 
   public addToCart(product:Product){
-    // console.log(product)
+    console.log("our log");
+    
+    console.log(product)
     let currentProduct = this.appService.Data.cartList.filter(item=>item.id == product.id)[0];
     if(currentProduct){
       if((currentProduct.cartCount + this.count) <= this.product.availibilityCount){

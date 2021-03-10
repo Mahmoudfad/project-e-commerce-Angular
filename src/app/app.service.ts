@@ -38,11 +38,10 @@ export class AppService {
         return this.http.get(this.baseURL + '/products/getAllProducts')
 
     }
-    public deleteProduct(Product_id:any){
-        return this.http.delete(this.baseURL+'/products/deleteProduct' + '/'+ Product_id)
-      }
-    public getProductById(id): Observable<Product>{
-        return this.http.get<Product>(this.url + 'product-' + id + '.json');
+
+    public getProductById(id){
+        return this.http.get(this.baseURL + '/products/getProduct/' + id);
+        
     }
 
     public getBanners(): Observable<any[]>{

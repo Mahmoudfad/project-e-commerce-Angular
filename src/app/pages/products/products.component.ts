@@ -70,6 +70,7 @@ export class ProductsComponent implements OnInit {
               private router: Router) {
     this.settings = this.appSettings.settings;
   }
+  
   baseURL= environment.baseURL
 
 
