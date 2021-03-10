@@ -15,6 +15,9 @@ import { ListProductComponent } from './list-product/list-product.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ContactsComponent } from './contacts/contacts.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DetailsContactComponent } from './contacts/details-contact/details-contact.component';
+
 
 export const routes = [
   { 
@@ -41,7 +44,8 @@ export const routes = [
     ReactiveFormsModule,
     SharedModule,
     NgxDropzoneModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDialogModule
   ],
   declarations: [
     AccountComponent,
@@ -54,7 +58,12 @@ export const routes = [
     UpdateProductComponent,
     ListProductComponent,
     ContactsComponent,
+    DetailsContactComponent,
     
-  ]
+  ],
+  exports:[
+    DetailsContactComponent
+  ],
+  entryComponents: [DetailsContactComponent],
 })
 export class AccountModule { }

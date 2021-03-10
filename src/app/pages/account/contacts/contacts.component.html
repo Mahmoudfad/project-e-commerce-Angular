@@ -5,20 +5,20 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Phone</th>
-        <th scope="col">Message</th>
+        <th scope="col">Email</th>
         <th scope="col">details</th>
 
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let contact of ListContacts">
+      <tr *ngFor="let contact of ListContacts ;let i=index">
         <th scope="row" >1</th>
         <td>{{contact.name}}</td>
         <td>{{contact.phone}}</td>
-        <td>{{contact.message}}</td>
-        <td class="p-1 actions">          
-            <button mat-mini-fab color="primary" matTooltip="View">
-                <mat-icon>remove_red_eye</mat-icon>
+        <td>{{contact.email}} </td>
+        <td class="p-1 actions" >          
+            <button mat-mini-fab color="primary" matTooltip="View" (click)="openDialog(contact,contact._id)" > 
+                <mat-icon >remove_red_eye</mat-icon>
             </button> </td>
       </tr>
      

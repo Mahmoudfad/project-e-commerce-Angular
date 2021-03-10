@@ -27,7 +27,7 @@
       <div class="mat-cell text-muted">
         <app-controls [product]="product" [type]="'wish'" (onQuantityChange)="updateCart($event)"></app-controls>
       </div>
-      <div class="mat-cell">${{total[product.id] | number : '1.2-2'}}</div>
+      <div class="mat-cell">${{total[product._id] | number : '1.2-2'}}</div>
       <div class="mat-cell text-center">
         <div class="p-1">
           <button mat-mini-fab color="warn" (click)="remove(product)" matTooltip="Clear">
