@@ -14,5 +14,15 @@ export class ProductService {
   {
     return this.http.post( this.baseURL + '/products/addProduct',data)
   }
-  
+
+  getProductByGenderAndCategory(gender,categorie)
+   {
+    return this.http.get( this.baseURL + '/products/getProductsByGenderAndCategory/' + gender +'/'+ categorie)
+   }
+
+
+   getProductByGender(gender)
+   {
+    return this.http.get( this.baseURL + '/products/getProductsByGender/'+gender)
+   }
 }

@@ -11,13 +11,15 @@ import { DetailsContactComponent } from './details-contact/details-contact.compo
 })
 export class ContactsComponent implements OnInit {
   ListContacts=[] as any;
- 
+  seen=false;
   constructor( private ContactService: ContactService , public dialog: MatDialog) { }
 
   ngOnInit() {
     this.ContactService.getAllContacts().subscribe((res: any)=>{this.ListContacts=res},
 (erreur:any)=>{},
 ()=>console.log(this.ListContacts));
+
+  
 
   }
  
@@ -34,7 +36,7 @@ export class ContactsComponent implements OnInit {
      
     }
     )
-  
+  this.ngOnInit()
     
 }
 

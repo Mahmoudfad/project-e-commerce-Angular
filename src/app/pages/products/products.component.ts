@@ -6,6 +6,7 @@ import { AppService } from '../../app.service';
 import { Product, Category } from "../../app.models";
 import { Settings, AppSettings } from 'src/app/app.settings';
 import { environment } from 'src/environments/environment';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -14,16 +15,16 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductsComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) sidenav: any;
-  public sidenavOpen:boolean = true;
+  public sidenavOpen: boolean = true;
   private sub: any;
   public viewType: string = 'grid';
   public viewCol: number = 25;
   public counts = [12, 24, 36];
-  public count:any;
+  public count: any;
   public sortings = ['Sort by Default', 'Best match', 'Lowest first', 'Highest first'];
-  public sort:any;
+  public sort: any;
   public products = [] as any
-  public categories:Category[];
+  public categories: Category[];
   public brands = [];
   public priceFrom: number = 750;
   public priceTo: number = 1599;
@@ -60,65 +61,118 @@ export class ProductsComponent implements OnInit {
     { name: "17\"", selected: false },
     { name: "21\"", selected: false },
     { name: "23.4\"", selected: false }
-  ]; 
-  public page:any;
+  ];
+  public page: any;
   public settings: Settings;
-  constructor(public appSettings:AppSettings, 
-              private activatedRoute: ActivatedRoute, 
-              public appService:AppService, 
-              public dialog: MatDialog, 
-              private router: Router) {
+  constructor(public appSettings: AppSettings,
+    private activatedRoute: ActivatedRoute,
+    public appService: AppService,
+    private ProductService: ProductService,
+    public dialog: MatDialog,
+    private router: Router) {
     this.settings = this.appSettings.settings;
   }
-  
-  baseURL= environment.baseURL
 
+  baseURL = environment.baseURL
+  categorie;
+  gender;
 
   ngOnInit() {
+    
+    this.categorie = this.activatedRoute.snapshot.paramMap.get('categorie')
+    this.appService.updatedCategorie(this.categorie);
+    
+    
+    this.gender = this.activatedRoute.snapshot.paramMap.get('gender')
+    this.appService.updatedGender(this.gender)
+    this.getProductByCategory();
+
+    if (this.gender && !this.categorie) {
+
+
+      this.ProductService.getProductByGender(this.gender).subscribe((res: any) => { this.products = res },
+        (erreur: any) => { },
+        () => {
+          console.log(this.products);
+        });
+    }
+    else if (this.gender && this.categorie) {
+
+
+      this.ProductService.getProductByGenderAndCategory(this.gender, this.categorie).subscribe((res: any) => { this.products = res },
+        (erreur: any) => { },
+        () => {
+          console.log(this.products);
+        });
+    }
+    else {
+      this.getAllProducts();
+    }
+
+
+    // else {
+    //   this.ProductService.getMensProduct().subscribe((res: any)=>{this.products=res},
+    //   (erreur:any)=>{},
+    //   ()=>{});
+    // }
 
     this.count = this.counts[0];
     this.sort = this.sortings[0];
     this.sub = this.activatedRoute.params.subscribe(params => {
       //console.log(params['name']);
     });
-    if(window.innerWidth < 960){
+    if (window.innerWidth < 960) {
       this.sidenavOpen = false;
     };
-    if(window.innerWidth < 1280){
+    if (window.innerWidth < 1280) {
       this.viewCol = 33.3;
     };
 
     this.getCategories();
     this.getBrands();
-    this.getAllProducts();   
+
   }
 
-  public getAllProducts(){
-    this.appService.getProducts().subscribe(data=>{
-      this.products = data; 
+  public getProductByCategory() {
+    this.appService.getProductByCategory(this.appService.categorieSubject.value, this.gender).subscribe(data => {
+      console.log("this gender");
+      // this.appService.categorieSubject.value = data;
+      // this.appService.Data.categories = data;
+    });
+    this.appService.getCategorie().subscribe(data => {
+      console.log(data);
+    });
+    this.appService.getGender().subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  public getAllProducts() {
+    this.appService.getProducts().subscribe(data => {
+      this.products = data;
       console.log(this.products);
-      
-      
+
+
       //for show more product  
       for (var index = 0; index < 3; index++) {
-        this.products = this.products.concat(this.products);        
+        this.products = this.products.concat(this.products);
       }
     });
   }
 
-  public getCategories(){  
-    if(this.appService.Data.categories.length == 0) { 
+  public getCategories() {
+    if (this.appService.Data.categories.length == 0) {
       this.appService.getCategories().subscribe(data => {
         this.categories = data;
         this.appService.Data.categories = data;
       });
     }
-    else{
+    else {
       this.categories = this.appService.Data.categories;
     }
   }
 
-  public getBrands(){
+  public getBrands() {
     this.brands = this.appService.getBrands();
     this.brands.forEach(brand => { brand.selected = false });
   }
@@ -128,48 +182,53 @@ export class ProductsComponent implements OnInit {
   }
 
   @HostListener('window:resize')
-  public onWindowResize():void {
+  public onWindowResize(): void {
     (window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true;
     (window.innerWidth < 1280) ? this.viewCol = 33.3 : this.viewCol = 25;
   }
 
-  public changeCount(count){
+  public changeCount(count) {
     this.count = count;
-    this.getAllProducts(); 
+    this.getAllProducts();
   }
 
-  public changeSorting(sort){
+  public changeSorting(sort) {
     this.sort = sort;
   }
 
-  public changeViewType(viewType, viewCol){
+  public changeViewType(viewType, viewCol) {
     this.viewType = viewType;
     this.viewCol = viewCol;
   }
 
-  public openProductDialog(product){   
+  public openProductDialog(product) {
     let dialogRef = this.dialog.open(ProductDialogComponent, {
-        data: product,
-        panelClass: 'product-dialog',
-        direction: (this.settings.rtl) ? 'rtl' : 'ltr'
+      data: product,
+      panelClass: 'product-dialog',
+      direction: (this.settings.rtl) ? 'rtl' : 'ltr'
     });
     dialogRef.afterClosed().subscribe(product => {
-      if(product){
-        this.router.navigate(['/products', product.id, product.name]); 
+      if (product) {
+        this.router.navigate(['/products', product.id, product.name]);
       }
     });
   }
 
-  public onPageChanged(event){
-      this.page = event;
-      this.getAllProducts(); 
-      window.scrollTo(0,0); 
+  public onPageChanged(event) {
+    this.page = event;
+    this.getAllProducts();
+    window.scrollTo(0, 0);
   }
 
-  public onChangeCategory(event){
-    if(event.target){
-      this.router.navigate(['/products', event.target.innerText.toLowerCase()]); 
-    }   
+  public onChangeCategory(event) {
+  
+    
+    if (event.target) {
+      console.log(event.target.innerText.toLowerCase());
+      this.appService.categorieSubject.next(event.target.innerText)
+      // this.router.navigate(['/products', event.target.innerText.toLowerCase()]);
+      this.getProductByCategory()
+    }
   }
 
 }
