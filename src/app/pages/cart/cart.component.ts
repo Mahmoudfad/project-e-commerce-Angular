@@ -1,5 +1,9 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ProductService } from 'src/app/services/product.service';
 import { Data, AppService } from '../../app.service';
+import { comandModel } from '../cart/comandModel';
 
 @Component({
   selector: 'app-cart',
@@ -11,16 +15,74 @@ export class CartComponent implements OnInit {
   grandTotal = 0;
   cartItemCount = [];
   cartItemCountTotal = 0;
-  constructor(public appService:AppService) { }
-
+  constructor(public appService:AppService , public productService : ProductService) { }
+  cartTab
+  count=1
+  selectSize :FormGroup;
+  
   ngOnInit() {
-    this.appService.Data.cartList.forEach(product=>{
-      this.total[product.id] = product.cartCount*product.newPrice;
-      this.grandTotal += product.cartCount*product.newPrice;
-      this.cartItemCount[product.id] = product.cartCount;
-      this.cartItemCountTotal += product.cartCount;
-    })
+
+
+  
+
+
+
+
+    // .forEach(product=>{
+    //   this.total[product.id] = product.cartCount*product.newPrice;
+    //   this.grandTotal += product.cartCount*product.newPrice;
+    //   this.cartItemCount[product.id] = product.cartCount;
+    //   this.cartItemCountTotal += product.cartCount;
+    // })
+
+   this.cartTab= JSON.parse(localStorage.getItem('cart') || '[]')
+   console.log(this.cartTab);
+
+   this.cartTab.forEach(element => {
+     console.log(element.sizesQuantity);
+     
+   });
+
+
+   
+
   }
+
+
+  changeSize(value){
+    console.log(value);
+
+  }
+ 
+    public increment(i){
+
+      console.log(i);
+      this.cartTab[i].cartCount+=1
+      localStorage.setItem('cart',JSON.stringify(this.cartTab))
+      console.log(this.selectSize.get('size').value);
+      
+     
+    
+      // if(this.count < product.availibilityCount){
+      //   this.count++;
+     
+      // }
+      // else{
+      //   // this.snackBar.open('You can not choose more items than available. In stock ' + this.count + ' items.', '×', { panelClass: 'error', verticalPosition: 'top', duration: 3000 });
+      // }    
+    }
+        
+
+
+
+
+
+
+    decrement(i) {
+      console.log(i);
+      this.cartTab[i].cartCount-=1
+      localStorage.setItem('cart',JSON.stringify(this.cartTab))
+    }
 
   public updateCart(value){
     if(value){
@@ -79,6 +141,28 @@ export class CartComponent implements OnInit {
     this.appService.Data.cartList.length = 0;
     this.appService.Data.totalPrice = 0;
     this.appService.Data.totalCartCount = 0;
+  
   } 
+
+
+  aa (e){
+    // this.cartTab.forEach(element => {
+    //   object : new comandModel ;{
+    //     nameProduct: element.productName;
+    //     totalPrice:  ;
+    //     size : 
+    //     quantity: 
+    //     productId :element._id
+    //    };
+    // });
+
+// this.productService.sharedDataComand="ddd"
+console.log(e.target.data);
+
+
+
+
+
+  }
 
 }
