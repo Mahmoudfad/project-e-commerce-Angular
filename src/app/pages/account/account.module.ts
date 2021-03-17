@@ -14,6 +14,8 @@ import { UpdateProductComponent } from './update-product/update-product.componen
 import { ListProductComponent } from './list-product/list-product.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ContactsComponent } from './contacts/contacts.component';
+import { ModalComponent } from './list-product/modal/modal.component';
+
 
 
 export const routes = [
@@ -53,7 +55,12 @@ export const routes = [
     UpdateProductComponent,
     ListProductComponent,
     ContactsComponent,
+    ModalComponent,
     
-  ]
+  ],
+  exports:[
+    ModalComponent
+  ],
+  entryComponents: [ModalComponent],
 })
 export class AccountModule { }
