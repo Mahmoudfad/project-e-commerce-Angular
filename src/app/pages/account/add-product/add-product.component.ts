@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
-
+import { AccountModule } from 'src/app/pages/account/account.module'
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -11,7 +13,7 @@ export class AddProductComponent implements OnInit {
   productForm:FormGroup;
   file;
   
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,private router: Router) { }
 files: File[] = [];
 
 onSelect(event) {
@@ -83,8 +85,9 @@ sq : any
     },
     err=>{},
     ()=>{console.log("product created");
+    this.productForm.reset()
     })
-  
+    this.router.navigateByUrl('/account/listProduct');
   }
   remove(i){
     const sq = this.productForm.controls.sizesQuantity as FormArray

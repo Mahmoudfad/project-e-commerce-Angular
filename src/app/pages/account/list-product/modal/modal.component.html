@@ -1,0 +1,121 @@
+<h1 mat-dialog-title>Update the product</h1>
+
+
+<form [formGroup]="productUpdateForm">
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Product name</mat-label>
+    <input matInput formControlName="productName" value={{data.productName}}>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+
+    <mat-label>Gender</mat-label>
+    <mat-select formControlName="gender">
+      <mat-option value="male">Male</mat-option>
+      <mat-option value="female">Female</mat-option>
+    </mat-select>
+  </mat-form-field>
+    <br>
+
+
+    <mat-form-field appearance="fill">
+    <mat-label>Categorie</mat-label>
+    <mat-select formControlName="categorie">
+      <mat-option value="sneakers">Sneakers</mat-option>
+      <mat-option value="sandals">Sandals</mat-option>
+      <mat-option value="casual">Casual shoes</mat-option>
+      <mat-option value="boots">Boots</mat-option>
+      <mat-option value="running">Running</mat-option>
+      <mat-option value="basket">Basket</mat-option>
+    </mat-select>
+    </mat-form-field><br>
+    <br>
+
+    <section class="example-section">
+      <label class="example-margin">Top products:</label>
+      <mat-radio-group formControlName="topProduct"value={{data.topProduct.value}}>
+        <mat-radio-button class="example-margin" value="true">Yes</mat-radio-button>
+        <mat-radio-button class="example-margin" value="false">No</mat-radio-button>
+      </mat-radio-group>
+    </section><br>
+
+    <mat-form-field appearance="fill">
+    <mat-label>Description :</mat-label>
+    <textarea matInput formControlName="description" value={{data.description}}></textarea>
+    </mat-form-field>
+    <br>
+
+
+    <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input type="number" matInput formControlName="price" value={{data.price}}>
+    </mat-form-field><br>
+
+    <br>
+    <div formArrayName="sizesQuantity"
+      *ngFor="let sq of productUpdateForm.get('sizesQuantity')['controls']; let i=index">
+
+
+      <ng-container [formGroupName]="i">
+        <mat-form-field appearance="fill">
+          <mat-label>Size</mat-label>
+         
+          <mat-select formControlName="size" >
+            <mat-option value="37">37</mat-option>
+            <mat-option value="38">38</mat-option>
+            <mat-option value="39">39</mat-option>
+            <mat-option value="40">40</mat-option>
+            <mat-option value="41">41</mat-option>
+            <mat-option value="42">42</mat-option>
+            <mat-option value="43">43</mat-option>
+            <mat-option value="44">44</mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <span></span>
+        <input type="number" matInput formControlName="quantity">
+        </mat-form-field>
+        <button mat-mini-fab color="accent" (click)="remove(i)" aria-label="Example icon button with a plus one icon">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-mini-fab color="accent" (click)="addSizeQuantity()"
+        aria-label="Example icon button with a plus one icon">
+        <mat-icon>plus_one</mat-icon>
+      </button>
+      </ng-container>
+    </div>
+    
+      
+    
+
+     <!-- <div class="input-group mb-3"> -->
+            <!-- <input type="file" class="form-control" id="inputGroupFile02" formControlName='productImage'(change)="onFileSelect($event)" > -->
+            <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
+          <!-- </div>  -->
+    
+      <ngx-dropzone (change)="onSelect($event)">
+        <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+          <ngx-dropzone-label></ngx-dropzone-label>
+        </ngx-dropzone-preview>
+      </ngx-dropzone>  
+
+     <!-- <div class="d-grid gap-2">
+     <button class="btn btn-success"  (click)="ajouter()" type="button">Add</button> 
+     </div>  -->
+
+    <div mat-dialog-actions>
+      <button mat-raised-button mat-dialog-close>Close</button>
+      <button mat-raised-button mat-dialog-close color="primary" (click)="update(productUpdateForm.value)">Confirm Update</button>
+    </div>
+
+</form>
+
+
