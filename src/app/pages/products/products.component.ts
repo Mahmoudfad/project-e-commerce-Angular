@@ -134,7 +134,7 @@ export class ProductsComponent implements OnInit {
   }
 
   public getProductByCategory() {
-    this.appService.getProductByCategory(this.categorie, this.gender).subscribe(data => {
+    this.appService.getProductByCategory(this.appService.categorieSubject.value, this.gender).subscribe(data => {
       console.log("this gender");
       // this.appService.categorieSubject.value = data;
       // this.appService.Data.categories = data;
@@ -221,10 +221,13 @@ export class ProductsComponent implements OnInit {
   }
 
   public onChangeCategory(event) {
+  
+    
     if (event.target) {
       console.log(event.target.innerText.toLowerCase());
-      
-      this.router.navigate(['/products', event.target.innerText.toLowerCase()]);
+      this.appService.categorieSubject.next(event.target.innerText)
+      // this.router.navigate(['/products', event.target.innerText.toLowerCase()]);
+      this.getProductByCategory()
     }
   }
 
