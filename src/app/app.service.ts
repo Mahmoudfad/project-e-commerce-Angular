@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
 import { Observable ,BehaviorSubject } from 'rxjs';
-=======
-import { BehaviorSubject, Observable } from 'rxjs';
->>>>>>> 7d2b9f9048f0bb1ee21c95c2acaba873453b6639
 import { MatSnackBar } from '@angular/material';
 import { Category, Product } from './app.models';
 import { environment } from 'src/environments/environment';
@@ -21,12 +17,8 @@ export class Data {
 
 @Injectable()
 export class AppService {
-<<<<<<< HEAD
 categorieSubject =new BehaviorSubject<string>(null);
 genderSubject = new BehaviorSubject<string>(null)
-=======
-    
->>>>>>> 7d2b9f9048f0bb1ee21c95c2acaba873453b6639
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -62,7 +54,6 @@ genderSubject = new BehaviorSubject<string>(null)
        return this.http.put(this.baseURL + '/products/update/' +id,formValue)
    }
 
-<<<<<<< HEAD
     public getProductByCategory(gender,categorie){
         this.categorieSubject.next(categorie);
         this.genderSubject.next(gender);
@@ -84,10 +75,6 @@ genderSubject = new BehaviorSubject<string>(null)
         return this.genderSubject.asObservable();
     }
 
-=======
-
-    
->>>>>>> 7d2b9f9048f0bb1ee21c95c2acaba873453b6639
     public getProductById(id){
         return this.http.get(this.baseURL + '/products/productById/' + id );
     }
