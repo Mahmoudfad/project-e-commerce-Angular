@@ -14,6 +14,8 @@ import { UpdateProductComponent } from './update-product/update-product.componen
 import { ListProductComponent } from './list-product/list-product.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ContactsComponent } from './contacts/contacts.component';
+import { ModalComponent } from './list-product/modal/modal.component';
+
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DetailsContactComponent } from './contacts/details-contact/details-contact.component';
@@ -58,12 +60,17 @@ export const routes = [
     UpdateProductComponent,
     ListProductComponent,
     ContactsComponent,
-    DetailsContactComponent,
+    ModalComponent,
     
   ],
   exports:[
+    ModalComponent,
     DetailsContactComponent
   ],
-  entryComponents: [DetailsContactComponent],
+  entryComponents: [ModalComponent,DetailsContactComponent]
+  
+   
+    
+  
 })
 export class AccountModule { }
