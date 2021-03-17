@@ -61,6 +61,7 @@ export const routes = [
     ListProductComponent,
     ContactsComponent,
     ModalComponent,
+    DetailsContactComponent,
     
   ],
   exports:[
