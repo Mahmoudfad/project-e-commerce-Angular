@@ -26,8 +26,9 @@ export class ContactComponent implements OnInit {
   public onContactFormSubmit(values:Object):void {
     if (this.contactForm.valid) {
       this.ContactService.contactAdmin(this.contactForm.value).subscribe((res)=>{}
-      
-        )  }
+        )
+       
+      this.contactForm.reset()  }
   }
 
 }

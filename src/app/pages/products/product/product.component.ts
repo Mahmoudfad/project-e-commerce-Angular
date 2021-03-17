@@ -17,18 +17,23 @@ export class ProductComponent implements OnInit {
   @ViewChild('zoomViewer', { static: true }) zoomViewer;
   @ViewChild(SwiperDirective, { static: true }) directiveRef: SwiperDirective;
   public config: SwiperConfigInterface={};
-  public product: Product;
+  public product: any;
   public image: any;
   public zoomImage: any;
   private sub: any;
   public form: FormGroup;
-  public relatedProducts: Array<any>;
-
+  public relatedProducts: Array<Product>;
+  public productId:string
   constructor(public appService:AppService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, public formBuilder: FormBuilder) {  }
 
-  ngOnInit() {      
+  ngOnInit() {  
+   
+    // this.productId= this.activatedRoute.snapshot    
     this.sub = this.activatedRoute.params.subscribe(params => { 
-      this.getProductById(params['id']); 
+      this.productId= params.id
+      this.getProductById();
+      
+       
     }); 
     this.form = this.formBuilder.group({ 
       'review': [null, Validators.required],            
@@ -60,14 +65,16 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  public getProductById(id){
-    this.appService.getProductById(id).subscribe(data=>{
-      // this.product = data;
-      // this.image = data.images[0].medium;
-      // this.zoomImage = data.images[0].big;
+  public getProductById(){
+    this.appService.getProductById(this.productId).subscribe(data=>{
+      this.product = data;
+      console.log(this.product);
+      
+      this.image = this.product.productImage;
+      // this.zoomImage = this.product.productImage[0].big;
       setTimeout(() => { 
         this.config.observer = true;
-       // this.directiveRef.setIndex(0);
+       this.directiveRef.setIndex(0);
       });
     });
   }
