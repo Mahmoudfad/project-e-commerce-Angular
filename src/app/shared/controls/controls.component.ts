@@ -40,32 +40,32 @@ export class ControlsComponent implements OnInit {
 
 
 
-  public increment(count){
-    if(this.count < this.product.availibilityCount){
-      this.count++;
-      let obj = {
-        productId: this.product.id,
-        soldQuantity: this.count,
-        total: this.count * this.product.newPrice
-      }
-      this.changeQuantity(obj);
-    }
-    else{
-      this.snackBar.open('You can not choose more items than available. In stock ' + this.count + ' items.', '×', { panelClass: 'error', verticalPosition: 'top', duration: 3000 });
-    }    
-  }
+  // public increment(count){
+  //   if(this.count < this.product.availibilityCount){
+  //     this.count++;
+  //     let obj = {
+  //       productId: this.product.id,
+  //       soldQuantity: this.count,
+  //       total: this.count * this.product.newPrice
+  //     }
+  //     this.changeQuantity(obj);
+  //   }
+  //   else{
+  //     this.snackBar.open('You can not choose more items than available. In stock ' + this.count + ' items.', '×', { panelClass: 'error', verticalPosition: 'top', duration: 3000 });
+  //   }    
+  // }
 
-  public decrement(count){
-    if(this.count > 1){
-      this.count--;
-      let obj = {
-        productId: this.product.id,
-        soldQuantity: this.count,
-        total: this.count * this.product.newPrice
-      }
-      this.changeQuantity(obj);
-    }
-  }
+  // public decrement(count){
+  //   if(this.count > 1){
+  //     this.count--;
+  //     let obj = {
+  //       productId: this.product.id,
+  //       soldQuantity: this.count,
+  //       total: this.count * this.product.newPrice
+  //     }
+  //     this.changeQuantity(obj);
+  //   }
+  // }
 
   public addToCompare(product:Product){
     this.appService.addToCompare(product);
@@ -79,19 +79,20 @@ export class ControlsComponent implements OnInit {
     console.log("our log");
     
     console.log(product)
-    let currentProduct = this.appService.Data.cartList.filter(item=>item.id == product.id)[0];
+    let currentProduct = this.appService.cartTab.filter(item=>item.id == product.id)[0];
     if(currentProduct){
-      if((currentProduct.cartCount + this.count) <= this.product.availibilityCount){
-        product.cartCount = currentProduct.cartCount + this.count;
-      }
-      else{
-        this.snackBar.open('You can not add more items than available. In stock ' + this.product.availibilityCount + ' items and you already added ' + currentProduct.cartCount + ' item to your cart', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
-        return false;
-      }
+      // if((currentProduct.cartCount + this.count) <= this.product.availibilityCount){
+      //   product.cartCount = currentProduct.cartCount + this.count;
+      // }
+      // else{
+      //   this.snackBar.open('You can not add more items than available. In stock ' + this.product.availibilityCount + ' items and you already added ' + currentProduct.cartCount + ' item to your cart', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
+      //   return false;
+      // }
     }
     else{
       product.cartCount = this.count;
     }
+
     this.appService.addToCart(product);
   }
 

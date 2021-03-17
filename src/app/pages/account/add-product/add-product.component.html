@@ -48,6 +48,11 @@
       <mat-label>Price</mat-label>
       <input type="number" matInput formControlName="price">
     </mat-form-field><br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Discount</mat-label>
+      <input matInput formControlName="discount">
+    </mat-form-field><br>
   
   
   <div formArrayName="sizesQuantity" *ngFor="let sq of productForm.get('sizesQuantity')['controls']; let i=index">

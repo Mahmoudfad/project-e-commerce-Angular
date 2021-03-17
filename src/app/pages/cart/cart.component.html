@@ -1,11 +1,11 @@
-<div *ngIf="appService.Data.cartList.length == 0">
+<div *ngIf="cartTab.length == 0">
   <mat-chip-list>
       <mat-chip color="warn" selected="true">YOU HAVE NO ITEMS IN YOUR SHOPPING CART.</mat-chip>
   </mat-chip-list>
   <a [routerLink]="['/']" mat-raised-button color="primary" class="mt-2">Continue shopping</a>
 </div>
 
-<mat-card *ngIf="appService.Data.cartList?.length > 0" class="p-0">
+<mat-card *ngIf="cartTab.length > 0" class="p-0">
 
   <div class="mat-table cart-table">
     <div class="mat-header-row">
@@ -13,6 +13,10 @@
       <div class="mat-header-cell">Name</div>
       <div class="mat-header-cell">Price</div>      
       <div class="mat-header-cell">Quantity</div>
+      <div class="mat-header-cell">Sizes available</div>
+      <div class="mat-header-cell">Discounted price</div>
+
+
       <div class="mat-header-cell">Total</div>
       <div class="mat-header-cell text-center">
         <div class="px-1">
@@ -20,13 +24,45 @@
         </div>
       </div>
     </div>
-    <div *ngFor="let product of appService.Data.cartList" class="mat-row">
-      <div class="mat-cell"><img [src]="product.images[0].small"></div>
-      <div class="mat-cell"><a [routerLink]="['/products', product.id, product.name]" class="product-name">{{product.name}}</a></div>
-      <div class="mat-cell">${{product.newPrice | number : '1.2-2'}}</div>      
-      <div class="mat-cell text-muted">
-        <app-controls [product]="product" [type]="'wish'" (onQuantityChange)="updateCart($event)"></app-controls>
-      </div>
+    <div *ngFor="let product of cartTab ; let i = index" class="mat-row">
+      <div class="mat-cell"><img [src]="'http://localhost:3000/' + product.imageProduct"></div>
+      <div class="mat-cell"><a [routerLink]="['/products', product._id, product.productName]" class="product-name">{{product.productName}}</a></div>
+      <div class="mat-cell">${{product.price | number : '1.2-2'}}</div>      
+      <div class="mat-cell">
+       <!-- <button mat-mini-fab color="primary" (click)='increment()'>+</button>
+       <span mat-mini-fab color="warn">{{counter}}</span>
+       <button mat-mini-fab color="warn" (click)='decrement()'>-</button>       -->
+<div>
+       <!-- <input type="number" formControlName="quantityComand" style="width: 30%;" > --> 
+       <!-- <div *ngIf="product?.availibilityCount > 0 && (type=='all' || type=='wish')"> --> 
+        <bdi>
+            <!-- <span *ngIf="type!='wish'" class="fw-500">Quantity:</span>  -->
+            <button mat-icon-button matTooltip="Remove" (click)="decrement(i)"><mat-icon>remove</mat-icon></button>
+            <span> {{product.cartCount}} </span>
+            <button mat-icon-button matTooltip="Add" (click)="increment(i)"><mat-icon>add</mat-icon></button>
+        </bdi>
+     </div>   
+      
+ 
+ </div>
+ 
+      <div class="mat-cell">
+       
+          <mat-label>Size</mat-label>
+          <mat-select  > 
+            <mat-option *ngFor="let element of product.sizesQuantity" (click)="changeSize(element.size)" [value]=element.size>{{element.size}}</mat-option>
+          
+        </mat-select>
+     
+      <!-- <div >
+        <button mat-button color="primary">{{element.size}}</button>
+      </div> -->
+     
+
+</div>
+<div class="mat-cell" >
+  <span>{{product.price - (product.price * (product.discount/100))}}</span>
+  </div>
       <div class="mat-cell">${{total[product.id] | number : '1.2-2'}}</div>
       <div class="mat-cell text-center">
         <div class="p-1">
@@ -34,9 +70,11 @@
               <mat-icon>close</mat-icon>
           </button>
         </div>
-      </div>
+      </div> 
       
     </div>
+
+
     <div class="mat-row">
       <div class="mat-cell"><a [routerLink]="['/']" mat-raised-button color="primary">Continue shopping</a></div>
       <div class="mat-cell"></div>
@@ -56,6 +94,8 @@
         </div>
       </div>
       <div class="mat-cell text-center"><a [routerLink]="['/checkout']" mat-raised-button color="primary">Proceed To Checkout</a></div>
+
+      
     </div>
   </div>
 

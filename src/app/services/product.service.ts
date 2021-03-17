@@ -5,7 +5,9 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
+  sharedDataComand:any
 
    baseURL= environment.baseURL
   constructor(public http:HttpClient) { }
@@ -17,4 +19,7 @@ export class ProductService {
   getAllProducts(){
     return this.http.get(this.baseURL + '/products/getAllProducts')
   }
+
+
+
 }
