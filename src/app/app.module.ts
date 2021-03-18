@@ -9,7 +9,7 @@ import { OverlayContainer, Overlay } from '@angular/cdk/overlay';
 import { MAT_MENU_SCROLL_STRATEGY } from '@angular/material';
 import { CustomOverlayContainer } from './theme/utils/custom-overlay-container';
 import { menuScrollStrategy } from './theme/utils/scroll-strategy';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
@@ -44,6 +44,7 @@ import {MatButtonModule} from '@angular/material/button';
 MatButtonModule,
     
     SharedModule,
+    FormsModule, ReactiveFormsModule,
     routing
   ],
   declarations: [

@@ -35,8 +35,7 @@ onRemove(event) {
         topProduct :new FormControl('', Validators.required),
         description :new FormControl('', Validators.required),
         price : new FormControl('', Validators.required),
-        // sale :new FormControl('', Validators.required),
-        // productImage : new FormControl (),
+        discount :new FormControl('', Validators.required),
         sizesQuantity: new FormArray([
           new FormGroup({
             size : new FormControl(),
@@ -73,6 +72,8 @@ sq : any
     formData.set('topProduct', this.productForm.get('topProduct').value);
     formData.set('description', this.productForm.get('description').value);
     formData.set('price', this.productForm.get('price').value);
+    formData.set('discount', this.productForm.get('discount').value);
+
     formData.set('sizesQuantity', JSON.stringify(this.productForm.get('sizesQuantity').value));
    this.files.forEach(image=>{
     formData.append('image', image);
