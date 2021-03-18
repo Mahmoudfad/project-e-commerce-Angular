@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material';
+import { ProductService } from 'src/app/services/product.service';
 import { Data, AppService } from '../../app.service';
 
 @Component({
@@ -19,10 +20,17 @@ export class CheckoutComponent implements OnInit {
   years = [];
   deliveryMethods = [];
   grandTotal = 0;
+cartTab
+baseURL = "localhost:3000"
+  constructor(public appService:AppService, public formBuilder: FormBuilder , public productService : ProductService) { }
 
-  constructor(public appService:AppService, public formBuilder: FormBuilder) { }
-
-  ngOnInit() {    
+  ngOnInit() {   
+    this.cartTab= JSON.parse(localStorage.getItem('cart') || '[]')
+    console.log(this.cartTab);
+ 
+ this.productService.sharedDataComand
+    
+    
     this.appService.Data.cartList.forEach(product=>{
       this.grandTotal += product.cartCount*product.newPrice;
     });
