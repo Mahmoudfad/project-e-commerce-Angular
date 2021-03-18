@@ -85,7 +85,8 @@ export class ProductsComponent implements OnInit {
     
     this.gender = this.activatedRoute.snapshot.paramMap.get('gender')
     this.appService.updatedGender(this.gender)
-    this.getProductByCategory();
+    
+    this.getProductByCategory(this.appService.categorieSubject.value);
 
     if (this.gender && !this.categorie) {
 
@@ -132,20 +133,37 @@ export class ProductsComponent implements OnInit {
     this.getBrands();
 
   }
-
-  public getProductByCategory() {
-    this.appService.getProductByCategory(this.appService.categorieSubject.value, this.gender).subscribe(data => {
-      console.log("this gender");
+  public getProductByGender (gender){
+    this.appService.getProductByGender(gender).subscribe(data => {
+      this.products = data;
       // this.appService.categorieSubject.value = data;
       // this.appService.Data.categories = data;
     });
-    this.appService.getCategorie().subscribe(data => {
-      console.log(data);
+  }
+
+  public getProductByCategory(category) {
+    this.appService.getProductByCategory(category).subscribe(data => { 
+      this.products = data;
+      // this.appService.categorieSubject.value = data;
+      // this.appService.Data.categories = data;
     });
-    this.appService.getGender().subscribe(data => {
-      console.log(data);
+    // this.appService.getCategorie().subscribe(data => {
+    //   console.log(data);
+    // });
+    // this.appService.getGender().subscribe(data => {
+    //   console.log(data);
+    // });
+  }
+
+  public getProductByCategoryAndGender(gender,categorie){
+    this.appService.getProductByCategoryAndGender(gender,categorie).subscribe(data => {
+    
+      
+      this.products = data;
+     
     });
   }
+
 
   public getAllProducts() {
     this.appService.getProducts().subscribe(data => {
@@ -221,13 +239,13 @@ export class ProductsComponent implements OnInit {
   }
 
   public onChangeCategory(event) {
-  
-    
     if (event.target) {
-      console.log(event.target.innerText.toLowerCase());
-      this.appService.categorieSubject.next(event.target.innerText)
-      // this.router.navigate(['/products', event.target.innerText.toLowerCase()]);
-      this.getProductByCategory()
+     
+      this.appService.genderSubject.next(event.target.innerText.toLowerCase())
+      this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
+      this.getProductByGender(this.appService.genderSubject.value)
+      this.getProductByCategory(this.appService.categorieSubject.value)
+
     }
   }
 

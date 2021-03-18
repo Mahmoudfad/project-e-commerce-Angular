@@ -56,10 +56,16 @@ genderSubject = new BehaviorSubject<string>(null)
        return this.http.put(this.baseURL + '/products/update/' +id,formValue)
    }
 
-    public getProductByCategory(gender,categorie){
+    public getProductByCategoryAndGender(gender,categorie){
         this.categorieSubject.next(categorie);
         this.genderSubject.next(gender);
         return this.http.get( this.baseURL + '/products/getProductsByGenderAndCategory/' + gender +'/'+ categorie)
+    }
+    public getProductByCategory(categorie){
+        return this.http.get( this.baseURL + '/products/getProductsCategory/'+ categorie)
+    }
+    public getProductByGender(gender){
+        return this.http.get( this.baseURL + '/getProductsByGender/'+ gender)
     }
 
     updatedGender(gender){
