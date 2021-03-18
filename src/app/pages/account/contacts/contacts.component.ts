@@ -16,7 +16,8 @@ export class ContactsComponent implements OnInit {
 
   ngOnInit() {
     this.ContactService.getAllContacts().subscribe((res: any)=>{this.ListContacts=res},
-(erreur:any)=>{},
+(erreur:any)=>{console.log(erreur);
+},
 ()=>console.log(this.ListContacts));
 
   
