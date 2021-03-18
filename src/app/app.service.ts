@@ -27,6 +27,8 @@ genderSubject = new BehaviorSubject<string>(null)
         null, //totalPrice,
         0 //totalCartCount
     )
+
+   public cartTab= []
     public url = "assets/data/";
     baseURL= environment.baseURL
 
@@ -117,25 +119,29 @@ genderSubject = new BehaviorSubject<string>(null)
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
     } 
 
-    public addToCart(product:Product){
+    public addToCart(product:any){
         let message, status;        
        
         this.Data.totalPrice = null;
         this.Data.totalCartCount = null;
 
-        if(this.Data.cartList.filter(item=>item.id == product.id)[0]){ 
-            let item = this.Data.cartList.filter(item=>item.id == product.id)[0];
-            item.cartCount = product.cartCount;  
+        if(this.cartTab.filter(item=>item.id == product._id)[0]){ 
+            let item = this.cartTab.filter(item=>item.id == product._id)[0];
+            // item.cartCount = product.cartCount;  
         }
         else{           
-            this.Data.cartList.push(product);
-        }        
-        this.Data.cartList.forEach(product=>{
+            this.cartTab.push(product);
+            localStorage.setItem('cart', JSON.stringify(this.cartTab))
+            
+        }      
+        console.log(this.cartTab);
+          
+        this.cartTab.forEach(product=>{
             this.Data.totalPrice = this.Data.totalPrice + (product.cartCount * product.newPrice);
             this.Data.totalCartCount = this.Data.totalCartCount + product.cartCount;
         });
 
-        message = 'The product ' + product.name + ' has been added to cart.'; 
+        message = 'The product ' + product.productName + ' has been added to cart.'; 
         status = 'success';          
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
     }

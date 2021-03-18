@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
+  sharedDataComand= []as any
+  
 
    baseURL= environment.baseURL
   constructor(public http:HttpClient) { }
@@ -14,6 +16,12 @@ export class ProductService {
   {
     return this.http.post( this.baseURL + '/products/addProduct',data)
   }
+  getAllProducts(){
+    return this.http.get(this.baseURL + '/products/getAllProducts')
+  }
+
+
+
 
   getProductByGenderAndCategory(gender,categorie)
    {
