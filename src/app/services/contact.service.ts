@@ -19,7 +19,7 @@ contactAdmin(data)
     return this.http.get(this.baseURL + '/users/getAllContacts')
   } 
   messageViewed(id){
-    return this.http.get(this.baseURL + '/users/updateById/'+ id)
+    return this.http.get(this.baseURL + '/users/updateStatusById/'+ id)
   }
 
 }
