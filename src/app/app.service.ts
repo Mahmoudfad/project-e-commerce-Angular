@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable ,BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { Category, Product } from './app.models';
 import { environment } from 'src/environments/environment';
+import { catchError } from 'rxjs/operators';
 
 export class Data {
     constructor(public categories: Category[],
@@ -16,6 +17,8 @@ export class Data {
 
 @Injectable()
 export class AppService {
+categorieSubject =new BehaviorSubject<string>(null);
+genderSubject = new BehaviorSubject<string>(null)
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -30,20 +33,52 @@ export class AppService {
     baseURL= environment.baseURL
 
     constructor(public http:HttpClient, public snackBar: MatSnackBar) { }
-    
+    public getSizeByProduct(productId): Observable<any[]>{
+        return this.http.get<any[]>(this.baseURL + '/products/getSizeByProduct/'+productId);
+    }
+    public getQuantityByProduct(productId): Observable<any[]>{
+        return this.http.get<any[]>(this.baseURL + '/products/getQuantityByProduct/'+productId);
+    } 
+
+
     public getCategories(): Observable<Category[]>{
         return this.http.get<Category[]>(this.url + 'categories.json');
     }
    
     public getProducts(){        
-        // return this.http.get<Product[]>(this.url + type + '-products.json');
         return this.http.get(this.baseURL + '/products/getAllProducts')
 
     }
+    public deleteProduct(id){
+        return this.http.delete(this.baseURL+'/products/deleteProduct/'+id)
+    }
+   public updateProduct(id,formValue){
+       return this.http.put(this.baseURL + '/products/update/' +id,formValue)
+   }
+
+    public getProductByCategory(gender,categorie){
+        this.categorieSubject.next(categorie);
+        this.genderSubject.next(gender);
+        return this.http.get( this.baseURL + '/products/getProductsByGenderAndCategory/' + gender +'/'+ categorie)
+    }
+
+    updatedGender(gender){
+        this.genderSubject.next(gender);
+        
+    }
+    updatedCategorie(categorie){
+        this.categorieSubject.next(categorie);
+    }
+
+    getCategorie():Observable<any>{
+        return this.categorieSubject.asObservable();
+    }
+    getGender():Observable<any>{
+        return this.genderSubject.asObservable();
+    }
 
     public getProductById(id){
-        return this.http.get(this.baseURL + '/products/getProduct/' + id);
-        
+        return this.http.get(this.baseURL + '/products/productById/' + id );
     }
 
     public getBanners(): Observable<any[]>{

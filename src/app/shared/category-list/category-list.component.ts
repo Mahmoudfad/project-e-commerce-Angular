@@ -28,6 +28,8 @@ export class CategoryListComponent {
   }
 
   public changeCategory(event){
+  
+    
     this.change.emit(event);
   }
 

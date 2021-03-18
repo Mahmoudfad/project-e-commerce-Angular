@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { emailValidator } from '../../theme/utils/app-validators';
+import { ContactService } from 'src/app/services/contact.service';
+
 
 @Component({
   selector: 'app-contact',
@@ -10,7 +12,7 @@ import { emailValidator } from '../../theme/utils/app-validators';
 export class ContactComponent implements OnInit {
   contactForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder ,private ContactService: ContactService) { }
 
   ngOnInit() {
     this.contactForm = this.formBuilder.group({
@@ -23,8 +25,10 @@ export class ContactComponent implements OnInit {
 
   public onContactFormSubmit(values:Object):void {
     if (this.contactForm.valid) {
-      console.log(values);
-    }
+      this.ContactService.contactAdmin(this.contactForm.value).subscribe((res)=>{}
+        )
+       
+      this.contactForm.reset()  }
   }
 
 }

@@ -13,6 +13,13 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { ListProductComponent } from './list-product/list-product.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ContactsComponent } from './contacts/contacts.component';
+import { ModalComponent } from './list-product/modal/modal.component';
+
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DetailsContactComponent } from './contacts/details-contact/details-contact.component';
+
 
 export const routes = [
   { 
@@ -25,6 +32,8 @@ export const routes = [
           { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' } },
           { path: 'admin', component: AdminComponent, data: {  breadcrumb: 'admin' } },
           { path: 'addProduct', component: AddProductComponent, data: {  breadcrumb: 'addProduct' } },
+          { path:'listProduct',component:ListProductComponent,data:{breadcrumb:'listProduct'} },
+          { path:'contacts',component:ContactsComponent,data:{breadcrumb:'contacts'} },
 
       ]
   }
@@ -36,7 +45,9 @@ export const routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     SharedModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatBadgeModule,
+    MatDialogModule
   ],
   declarations: [
     AccountComponent,
@@ -47,7 +58,20 @@ export const routes = [
     AdminComponent,
     AddProductComponent,
     UpdateProductComponent,
-    ListProductComponent    
-  ]
+    ListProductComponent,
+    ContactsComponent,
+    ModalComponent,
+    DetailsContactComponent,
+    
+  ],
+  exports:[
+    ModalComponent,
+    DetailsContactComponent
+  ],
+  entryComponents: [ModalComponent,DetailsContactComponent]
+  
+   
+    
+  
 })
 export class AccountModule { }

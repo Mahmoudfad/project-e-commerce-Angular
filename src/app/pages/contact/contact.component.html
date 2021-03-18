@@ -44,7 +44,7 @@
         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
           <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Phone</mat-label>
-                <input matInput placeholder="Phone" formControlName="phone" required>
+                <input matInput placeholder="Phone" formControlName="phone" required type="number">
                 <mat-error *ngIf="contactForm.controls.phone.errors?.required">Phone is required</mat-error>
           </mat-form-field>
         </div>

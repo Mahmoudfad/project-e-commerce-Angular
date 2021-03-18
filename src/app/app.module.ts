@@ -26,6 +26,8 @@ import { AppInterceptor } from './theme/utils/app-interceptor';
 import { OptionsComponent } from './theme/components/options/options.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -38,6 +40,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDLf9Ywk47zipEtorDewwMmB3JtuXdzYL4'
     }),
+    MatInputModule,
+MatButtonModule,
+    
     SharedModule,
     FormsModule, ReactiveFormsModule,
     routing
@@ -51,7 +56,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     SidenavMenuComponent,
     BreadcrumbComponent,
     OptionsComponent,
-    FooterComponent
+    FooterComponent,
   ], 
   providers: [
     AppSettings,

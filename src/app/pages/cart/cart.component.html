@@ -24,6 +24,7 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
     <div *ngFor="let product of cartTab ; let i = index" class="mat-row">
       <div class="mat-cell"><img [src]="'http://localhost:3000/' + product.imageProduct"></div>
       <div class="mat-cell"><a [routerLink]="['/products', product._id, product.productName]" class="product-name">{{product.productName}}</a></div>
@@ -64,6 +65,16 @@
   <span>{{product.price - (product.price * (product.discount/100))}}</span>
   </div>
       <div class="mat-cell">${{total[product.id] | number : '1.2-2'}}</div>
+=======
+    <div *ngFor="let product of appService.Data.cartList" class="mat-row">
+      <div class="mat-cell"><img [src]="product.images[0].small"></div>
+      <div class="mat-cell"><a [routerLink]="['/products', product.id, product.name]" class="product-name">{{product.name}}</a></div>
+      <div class="mat-cell">${{product.newPrice | number : '1.2-2'}}</div>      
+      <div class="mat-cell text-muted">
+        <app-controls [product]="product" [type]="'wish'" (onQuantityChange)="updateCart($event)"></app-controls>
+      </div>
+      <div class="mat-cell">${{total[product._id] | number : '1.2-2'}}</div>
+>>>>>>> b8af8eedb6a72966100604d9582ae42a5c28a37c
       <div class="mat-cell text-center">
         <div class="p-1">
           <button mat-mini-fab color="warn" (click)="remove(product)" matTooltip="Clear">

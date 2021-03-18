@@ -18,6 +18,8 @@ export class ControlsComponent implements OnInit {
   constructor(public appService:AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
+  
+    
     if(this.product){
       if(this.product.cartCount > 0){
         this.count = this.product.cartCount;

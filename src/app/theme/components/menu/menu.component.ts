@@ -1,4 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +7,26 @@ import { Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  
-  constructor() { }
+  ListMens=[] as any;
+  ListWomens=[] as any;
 
-  ngOnInit() { }
+  constructor(private productService: ProductService) { }
+
+  ngOnInit() { 
+//     this.productService.getMensProduct().subscribe((res: any)=>{this.ListMens=JSON.parse(JSON.stringify(res))},
+// (erreur:any)=>{},
+// ()=>{
+
+  
+// }
+// );
+
+// this.productService.getWomensProduct().subscribe((res: any)=>{this.ListWomens=res},
+// (erreur:any)=>{},
+// ()=>{}
+// );
+
+  }
 
   openMegaMenu(){
     let pane = document.getElementsByClassName('cdk-overlay-pane');

@@ -1,1 +1,53 @@
-<p>list-product works!</p>
+
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th>Product Name</th>
+        <th>Gender</th>
+        <th>Categorie</th>
+        <th>Top Product</th>
+        <th>Description</th>
+        <th>price</th>
+        <th>Sizes Quantity</th>
+        <th>Image</th>
+        <th>Delete</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of ListProducts">
+        <td>{{product?.productName}}</td>
+        <td>{{product?.gender}}</td>
+        <td>{{product?.categorie}}</td>
+        <td>{{product?.topProduct}}</td>
+        <td>{{product?.description}}</td>
+        <td>{{product?.price}}</td>
+        <td>
+          <span *ngFor="let element of product?.sizesQuantity ">
+            {{element.size}}-{{element.quantity}}
+          </span>
+
+        </td>
+        <td><img src="{{baseURL}}/{{product?.imageProduct}}" style="max-width: 450px; max-height: 60px !important;"></td>
+        <td>
+          <div class="example-button-container">
+            <button mat-fab color="warn" aria-label="Example icon button with a home icon"
+              (click)='delete(product._id)'>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+        <td>
+          <div class="example-button-row"></div>
+          
+           <button mat-fab color="primary" mat-raised-button (click)="openDialog(product)">Update</button> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
