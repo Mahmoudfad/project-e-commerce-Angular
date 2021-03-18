@@ -18,7 +18,8 @@ export class Data {
 @Injectable()
 export class AppService {
 categorieSubject =new BehaviorSubject<string>(null);
-genderSubject = new BehaviorSubject<string>(null)
+genderSubject = new BehaviorSubject<string>(null);
+topProductSubject= new BehaviorSubject<string>(null);
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -31,6 +32,11 @@ genderSubject = new BehaviorSubject<string>(null)
     baseURL= environment.baseURL
 
     constructor(public http:HttpClient, public snackBar: MatSnackBar) { }
+
+public getTopProducts():Observable<any[]>{
+return this.http.get<any[]>(this.baseURL + 'products/getTopProducts/');
+}
+
     public getSizeByProduct(productId): Observable<any[]>{
         return this.http.get<any[]>(this.baseURL + '/products/getSizeByProduct/'+productId);
     }
