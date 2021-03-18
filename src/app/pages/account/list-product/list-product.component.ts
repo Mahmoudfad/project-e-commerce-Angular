@@ -37,9 +37,6 @@ this.http.getProducts().subscribe((res: any)=>{this.ListProducts=res},
 
   }
 
-<<<<<<< HEAD
-}
-=======
   openDialog(product) {
 
     const dialogConfig = new MatDialogConfig();
@@ -64,4 +61,3 @@ this.http.deleteProduct(productModel_id).subscribe(res=>console.log(res),(err)=>
 
 }
 }
->>>>>>> b8af8eedb6a72966100604d9582ae42a5c28a37c

@@ -5,6 +5,9 @@
   <a [routerLink]="['/']" mat-raised-button color="primary" class="mt-2">Continue shopping</a>
 </div>
 
+<div class="alert alert-secondary" role="alert" *ngIf="alertEx==true">
+  {{messageQuantity}}
+</div>
 <mat-card *ngIf="cartTab.length > 0" class="p-0">
 
   <div class="mat-table cart-table">
@@ -24,7 +27,6 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
     <div *ngFor="let product of cartTab ; let i = index" class="mat-row">
       <div class="mat-cell"><img [src]="'http://localhost:3000/' + product.imageProduct"></div>
       <div class="mat-cell"><a [routerLink]="['/products', product._id, product.productName]" class="product-name">{{product.productName}}</a></div>
@@ -38,9 +40,10 @@
        <!-- <div *ngIf="product?.availibilityCount > 0 && (type=='all' || type=='wish')"> --> 
         <bdi>
             <!-- <span *ngIf="type!='wish'" class="fw-500">Quantity:</span>  -->
-            <button mat-icon-button matTooltip="Remove" (click)="decrement(i)"><mat-icon>remove</mat-icon></button>
+            <button mat-icon-button matTooltip="Remove" (click)="decrement(i,product)"><mat-icon>remove</mat-icon></button>
             <span> {{product.cartCount}} </span>
-            <button mat-icon-button matTooltip="Add" (click)="increment(i)"><mat-icon>add</mat-icon></button>
+            
+            <button mat-icon-button matTooltip="Add" (click)="increment(i,product)"><mat-icon>add</mat-icon></button>
         </bdi>
      </div>   
       
@@ -51,7 +54,7 @@
        
           <mat-label>Size</mat-label>
           <mat-select  > 
-            <mat-option *ngFor="let element of product.sizesQuantity" (click)="changeSize(element.size)" [value]=element.size>{{element.size}}</mat-option>
+            <mat-option *ngFor="let element of product.sizesQuantity" (click)="changeSize(element.size,product._id)" [value]=element.size>{{element.size}}</mat-option>
           
         </mat-select>
      
@@ -65,16 +68,6 @@
   <span>{{product.price - (product.price * (product.discount/100))}}</span>
   </div>
       <div class="mat-cell">${{total[product.id] | number : '1.2-2'}}</div>
-=======
-    <div *ngFor="let product of appService.Data.cartList" class="mat-row">
-      <div class="mat-cell"><img [src]="product.images[0].small"></div>
-      <div class="mat-cell"><a [routerLink]="['/products', product.id, product.name]" class="product-name">{{product.name}}</a></div>
-      <div class="mat-cell">${{product.newPrice | number : '1.2-2'}}</div>      
-      <div class="mat-cell text-muted">
-        <app-controls [product]="product" [type]="'wish'" (onQuantityChange)="updateCart($event)"></app-controls>
-      </div>
-      <div class="mat-cell">${{total[product._id] | number : '1.2-2'}}</div>
->>>>>>> b8af8eedb6a72966100604d9582ae42a5c28a37c
       <div class="mat-cell text-center">
         <div class="p-1">
           <button mat-mini-fab color="warn" (click)="remove(product)" matTooltip="Clear">
@@ -104,7 +97,7 @@
           <span class="new-price">${{ (grandTotal - (grandTotal*0.15)) | number : '1.2-2'}}</span>
         </div>
       </div>
-      <div class="mat-cell text-center"><a [routerLink]="['/checkout']" mat-raised-button color="primary">Proceed To Checkout</a></div>
+      <div class="mat-cell text-center"><a (click)="toCheckOut()" mat-raised-button color="primary">Proceed To Checkout</a></div>
 
       
     </div>

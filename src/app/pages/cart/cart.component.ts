@@ -1,6 +1,8 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AnyAaaaRecord } from 'dns';
 import { ProductService } from 'src/app/services/product.service';
 import { Data, AppService } from '../../app.service';
 import { comandModel } from '../cart/comandModel';
@@ -15,11 +17,20 @@ export class CartComponent implements OnInit {
   grandTotal = 0;
   cartItemCount = [];
   cartItemCountTotal = 0;
-  constructor(public appService:AppService , public productService : ProductService) { }
+  constructor(public appService:AppService , public productService : ProductService , private router: Router) { }
   cartTab
   count=1
   selectSize :FormGroup;
-  
+
+  productSizeTab =[] as any
+  messageQuantity : any
+
+  sizeComandTab:any
+  alertEx= false
+  sizeObject:any
+  comandObject : any
+
+
   ngOnInit() {
 
 
@@ -49,27 +60,68 @@ export class CartComponent implements OnInit {
   }
 
 
-  changeSize(value){
+  changeSize(value,productId){
     console.log(value);
+ this.sizeObject={
+  size : value,
+  id : productId
+}
+this.productSizeTab.push(this.sizeObject)
+console.log(this.productSizeTab);
 
   }
  
-    public increment(i){
+  public increment(i,product){
 
-      console.log(i);
-      this.cartTab[i].cartCount+=1
-      localStorage.setItem('cart',JSON.stringify(this.cartTab))
-      console.log(this.selectSize.get('size').value);
+if (this.cartTab[i].cartCount == null ) {
+        this.cartTab[i].cartCount=1
+        this.cartTab[i].cartCount+=1
+
+   if (this.productSizeTab[i] != null) {
+  const elementFound = product.sizesQuantity.find(element=>element.size == this.productSizeTab[i])
+  
+        if (elementFound.quantity>= this.cartTab[i].cartCount) {
+           localStorage.setItem('cart',JSON.stringify(this.cartTab))
+           
+         }
+         else{
+         this.messageQuantity="The selected quantity is not available in the stock"
+         this.alertEx=true
+
+         console.log(this.messageQuantity);
+         }
+
+}
+else{
+  this.messageQuantity="Select a size before"
+  this.alertEx=true
+  console.log(this.messageQuantity);
+}
+      }
+      else {
+        this.cartTab[i].cartCount+=1
+        if (this.productSizeTab[i] != null) {
+          const elementFound = product.sizesQuantity.find(element=>element.size == this.productSizeTab[i])
+          
+                if (elementFound.quantity>= this.cartTab[i].cartCount) {
+                   localStorage.setItem('cart',JSON.stringify(this.cartTab))
+                   console.log(this.productSizeTab[i] , elementFound.quantity);                  
+                 }
+                 else{
+                 this.messageQuantity="The selected quantity is not available in the stock"
+                 this.alertEx=true
+                 console.log(this.messageQuantity); 
+                 }
+        }
+        else{
+          this.messageQuantity="Select a size before"
+          this.alertEx=true
+          console.log(this.messageQuantity);
+        }
+      }
+
+      console.log(this.productSizeTab);
       
-     
-    
-      // if(this.count < product.availibilityCount){
-      //   this.count++;
-     
-      // }
-      // else{
-      //   // this.snackBar.open('You can not choose more items than available. In stock ' + this.count + ' items.', '×', { panelClass: 'error', verticalPosition: 'top', duration: 3000 });
-      // }    
     }
         
 
@@ -78,10 +130,58 @@ export class CartComponent implements OnInit {
 
 
 
-    decrement(i) {
-      console.log(i);
-      this.cartTab[i].cartCount-=1
-      localStorage.setItem('cart',JSON.stringify(this.cartTab))
+    decrement(i,product) {
+      if (this.cartTab[i].cartCount == null ) {
+        this.cartTab[i].cartCount=1
+        this.cartTab[i].cartCount-=1
+
+   if (this.productSizeTab[i] != null) {
+  const elementFound = product.sizesQuantity.find(element=>element.size == this.productSizeTab[i])
+  
+        if (elementFound.quantity>= this.cartTab[i].cartCount) {
+           localStorage.setItem('cart',JSON.stringify(this.cartTab))
+           console.log('aaa');
+           this.alertEx=false
+
+           
+         }
+         else{
+         this.messageQuantity="The selected quantity is not available in the stock"
+         this.alertEx=true
+
+         console.log(this.messageQuantity);
+         }
+
+}
+else{
+  this.messageQuantity="Select a size before"
+  this.alertEx=true
+  console.log(this.messageQuantity);
+}
+      }
+      else {
+        this.cartTab[i].cartCount-=1
+        if (this.productSizeTab[i] != null) {
+          const elementFound = product.sizesQuantity.find(element=>element.size == this.productSizeTab[i])
+          
+                if (elementFound.quantity>= this.cartTab[i].cartCount) {
+                  this.alertEx=false
+                   localStorage.setItem('cart',JSON.stringify(this.cartTab))
+                   console.log(this.productSizeTab[i] , elementFound.quantity);  
+                
+                 }
+                 else{
+                 this.messageQuantity="The selected quantity is not available in the stock"
+                 this.alertEx=true
+                 console.log(this.messageQuantity); 
+                 }
+        }
+        else{
+          this.messageQuantity="Select a size before"
+          this.alertEx=true
+          console.log(this.messageQuantity);
+        }
+      }
     }
 
   public updateCart(value){
@@ -145,24 +245,27 @@ export class CartComponent implements OnInit {
   } 
 
 
-  aa (e){
-    // this.cartTab.forEach(element => {
-    //   object : new comandModel ;{
-    //     nameProduct: element.productName;
-    //     totalPrice:  ;
-    //     size : 
-    //     quantity: 
-    //     productId :element._id
-    //    };
-    // });
+  toCheckOut (){
+     
 
-// this.productService.sharedDataComand="ddd"
-console.log(e.target.data);
+    this.productSizeTab.forEach((element, i) => {
+      console.log(element,i);
+    this.productService.sharedDataComand.push(element)
+if (element.size) {
+  this.router.navigateByUrl('/checkout')}
+else {
+  this.messageQuantity=" Please select a size"
+}
+});
 
+console.log(this.productService.sharedDataComand);
+
+
+}
 
 
 
 
   }
 
-}
+
