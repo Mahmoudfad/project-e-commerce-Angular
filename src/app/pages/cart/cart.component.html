@@ -17,7 +17,8 @@
       <div class="mat-header-cell">Price</div>      
       <div class="mat-header-cell">Quantity</div>
       <div class="mat-header-cell">Sizes available</div>
-      <div class="mat-header-cell">Discounted price</div>
+      <div class="mat-header-cell">Unit price</div>
+      <div class="mat-header-cell">Discount</div>
 
 
       <div class="mat-header-cell">Total</div>
@@ -40,10 +41,13 @@
        <!-- <div *ngIf="product?.availibilityCount > 0 && (type=='all' || type=='wish')"> --> 
         <bdi>
             <!-- <span *ngIf="type!='wish'" class="fw-500">Quantity:</span>  -->
-            <button mat-icon-button matTooltip="Remove" (click)="decrement(i,product)"><mat-icon>remove</mat-icon></button>
+            <!-- <div *ngIf="enabledQuantity== true"> -->
+            <button mat-icon-button matTooltip="Remove" enabled (click)="decrement(i,product)"><mat-icon>remove</mat-icon></button>
+          <!-- </div> -->
             <span> {{product.cartCount}} </span>
-            
-            <button mat-icon-button matTooltip="Add" (click)="increment(i,product)"><mat-icon>add</mat-icon></button>
+            <!-- <div *ngIf="enabledQuantity== true"> -->
+            <button mat-icon-button matTooltip="Add" enabled (click)="increment(i,product)"><mat-icon>add</mat-icon></button>
+          <!-- </div> -->
         </bdi>
      </div>   
       
@@ -52,9 +56,8 @@
  
       <div class="mat-cell">
        
-          <mat-label>Size</mat-label>
           <mat-select  > 
-            <mat-option *ngFor="let element of product.sizesQuantity" (click)="changeSize(element.size,product._id)" [value]=element.size>{{element.size}}</mat-option>
+            <mat-option *ngFor="let element of product.sizesQuantity" (click)="changeSize(element.size,i)" [value]=element.size>{{element.size}}</mat-option>
           
         </mat-select>
      
@@ -65,9 +68,19 @@
 
 </div>
 <div class="mat-cell" >
-  <span>{{product.price - (product.price * (product.discount/100))}}</span>
+  <div *ngIf="product.discount!= null || product.discount!= 0">
+  <span>{{product.price -(product.price * (product.discount/100))}}</span>
+</div>
+<div *ngIf="product.discount== null || product.discount== 0" >
+  <span>{{product.price}}</span>
+</div>
   </div>
-      <div class="mat-cell">${{total[product.id] | number : '1.2-2'}}</div>
+
+  <div class="mat-cell" >
+    <span>{{product.discount}} %</span>
+    </div>
+
+      <div class="mat-cell">{{(product.price -(product.price * (product.discount/100)))* product.cartCount}}</div>
       <div class="mat-cell text-center">
         <div class="p-1">
           <button mat-mini-fab color="warn" (click)="remove(product)" matTooltip="Clear">
@@ -85,16 +98,12 @@
       <div class="mat-cell"></div>
       <div class="mat-cell text-right">
         <div fxLayout="column" fxLayoutAlign="center end" class="grand-total px-2">
-          <span>SubTotal:</span>
-          <span class="text-muted">Discount:</span>
-          <span class="new-price">Grand total:</span>
+          <span class="new-price">Grand total: </span>
         </div>        
       </div>
       <div class="mat-cell">
         <div fxLayout="column" fxLayoutAlign="center start" class="grand-total">
-          <span>${{ grandTotal | number : '1.2-2'}}</span>
-          <span class="text-muted">15%</span>
-          <span class="new-price">${{ (grandTotal - (grandTotal*0.15)) | number : '1.2-2'}}</span>
+          <span class="new-price">{{totalCartPrice}} TND</span>
         </div>
       </div>
       <div class="mat-cell text-center"><a (click)="toCheckOut()" mat-raised-button color="primary">Proceed To Checkout</a></div>

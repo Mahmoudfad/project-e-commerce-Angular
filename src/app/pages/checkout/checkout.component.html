@@ -167,13 +167,28 @@
             <div class="mat-header-cell">Quantity</div>
             <div class="mat-header-cell">Total</div>
           </div>
-          <div *ngFor="let product of appService.Data.cartList" class="mat-row">
+          <div *ngFor="let product of  cartTab" class="mat-row">
+            <div class="mat-cell"><img src="{{baseURL}}/{{product?.imageProduct}}"></div>
+            <div class="mat-cell">{{product?.productName}}</div>
+            <div class="mat-cell">
+              <div *ngIf="product.discount!= null || product.discount!= 0">
+                <span>{{product.price -(product.price * (product.discount/100))}}</span>
+              </div>
+              <div *ngIf="product.discount== null || product.discount== 0" >
+                <span>{{product.price}}</span>
+              </div>
+            </div>      
+            <div class="mat-cell text-muted"> {{product?.cartCount}} </div>
+            
+            <div class="mat-cell">{{(product.price -(product.price * (product.discount/100)))* product.cartCount}}</div>
+          </div>
+          <!-- <div *ngFor="let product of appService.Data.cartList" class="mat-row">
             <div class="mat-cell"><img [src]="product.images[0].small"></div>
             <div class="mat-cell">{{product.name}}</div>
             <div class="mat-cell">${{product.newPrice | number : '1.2-2'}}</div>      
             <div class="mat-cell text-muted"> {{product.cartCount}} </div>
             <div class="mat-cell">${{ (product.newPrice*product.cartCount) | number : '1.2-2'}}</div>
-          </div>
+          </div> -->
         </div>
       </div> 
     </div>
@@ -422,10 +437,18 @@
 
           <div *ngFor="let product of  cartTab" class="mat-row">
             <div class="mat-cell"><img src="{{baseURL}}/{{product?.imageProduct}}"></div>
-            <div class="mat-cell">{{product.productName}</div>
-            <div class="mat-cell">${{product.price | number : '1.2-2'}}</div>      
-            <div class="mat-cell text-muted"> 1 </div>
-            <div class="mat-cell">${{product.newPrice | number : '1.2-2'}}</div>
+            <div class="mat-cell">{{product?.productName}}</div>
+            <div class="mat-cell">
+              <div *ngIf="product.discount!= null || product.discount!= 0">
+                <span>{{product.price -(product.price * (product.discount/100))}}</span>
+              </div>
+              <div *ngIf="product.discount== null || product.discount== 0" >
+                <span>{{product.price}}</span>
+              </div>
+            </div>      
+            <div class="mat-cell text-muted"> {{product?.cartCount}} </div>
+            
+            <div class="mat-cell">{{(product.price -(product.price * (product.discount/100)))* product.cartCount}}</div>
           </div>
         </div>
       </div> 
