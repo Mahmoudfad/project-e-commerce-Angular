@@ -36,9 +36,11 @@ topProductSubject= new BehaviorSubject<string>(null);
     constructor(public http:HttpClient, public snackBar: MatSnackBar) { }
 
 public getTopProducts():Observable<any[]>{
-return this.http.get<any[]>(this.baseURL + 'products/getTopProducts/');
+return this.http.get<any[]>(this.baseURL + '/products/getTopProducts/');
 }
-
+public getOnSaleProducts():Observable<any[]>{
+    return this.http.get<any[]>(this.baseURL + '/products/getOnSaleProducts/');
+    }
     public getSizeByProduct(productId): Observable<any[]>{
         return this.http.get<any[]>(this.baseURL + '/products/getSizeByProduct/'+productId);
     }

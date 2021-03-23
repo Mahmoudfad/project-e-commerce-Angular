@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit {
   public onSaleProducts: Array<Product>;
   public topRatedProducts: Array<Product>;
   public newArrivalsProducts: Array<Product>;
-
-
+  public  topProducts:Array<Product>;
+  
   constructor(public appService:AppService) { }
-  topProducts:any;
+  
   ngOnInit() {
     // this.getBanners();
     // this.getProducts("featured");
@@ -34,14 +34,27 @@ export class HomeComponent implements OnInit {
   }
 
   public onLinkClick(e){
-    console.log(e);
-    if(e.target){
-    this.appService.topProductSubject.next(e.tab.textLabel); 
+    
+    console.log(e.index);
+    if (e.index==1){
+      this.getOnSaleProducts();
+    }
+    else if(e.index==2){
     this.getTopProducts();
   }
   }
+
+
+  public getOnSaleProducts(){
+    this.appService.getOnSaleProducts().subscribe(data=>{
+      this.onSaleProducts = data;
+    })
+  }
+
+
   public getTopProducts(){
     this.appService.getTopProducts().subscribe(data=>{
+      console.log(data);
       this.topProducts = data;
     })
   }

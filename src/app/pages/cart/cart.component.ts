@@ -2,7 +2,6 @@ import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnyAaaaRecord } from 'dns';
 import { ProductService } from 'src/app/services/product.service';
 import { Data, AppService } from '../../app.service';
 import { comandModel } from '../cart/comandModel';

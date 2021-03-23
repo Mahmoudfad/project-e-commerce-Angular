@@ -7,6 +7,7 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
 import { Data, AppService } from '../../app.service';
 import { Product } from "../../app.models";
 import { Settings, AppSettings } from 'src/app/app.settings';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products-carousel',
@@ -18,6 +19,7 @@ export class ProductsCarouselComponent implements OnInit {
   @Input('products') products: Array<Product> = [];
   public config: SwiperConfigInterface = {};
   public settings: Settings;
+  baseURL= environment.baseURL
   constructor(public appSettings:AppSettings, public appService:AppService, public dialog: MatDialog, private router: Router) { 
     this.settings = this.appSettings.settings;
   }
@@ -57,10 +59,12 @@ export class ProductsCarouselComponent implements OnInit {
   }
 
   public openProductDialog(product){   
+    
     let dialogRef = this.dialog.open(ProductDialogComponent, {
         data: product,
         panelClass: 'product-dialog',
-        direction: (this.settings.rtl) ? 'rtl' : 'ltr'
+        direction: (this.settings.rtl) ? 'rtl' : 'ltr',
+        width: '550px', height:'600px'
     });
     dialogRef.afterClosed().subscribe(product => {
       if(product){
