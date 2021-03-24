@@ -36,6 +36,7 @@ onRemove(event) {
         description :new FormControl('', Validators.required),
         price : new FormControl('', Validators.required),
         discount :new FormControl('', Validators.required),
+        selectedSize:new FormControl(0, Validators.required),
         sizesQuantity: new FormArray([
           new FormGroup({
             size : new FormControl(),
@@ -52,6 +53,7 @@ onRemove(event) {
   }
 
 sq : any
+a = 0
   addSizeQuantity(){
      this.sq = this.productForm.controls.sizesQuantity as FormArray
      this.sq.push(  new FormGroup({
@@ -80,6 +82,7 @@ sq : any
     formData.set('description', this.productForm.get('description').value);
     formData.set('price', this.productForm.get('price').value);
     formData.set('discount', this.productForm.get('discount').value);
+    formData.set('selectedSize', this.productForm.get('selectedSize').value);
 
     formData.set('sizesQuantity', JSON.stringify(this.productForm.get('sizesQuantity').value));
    this.files.forEach(image=>{

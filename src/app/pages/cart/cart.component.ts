@@ -1,8 +1,8 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { FlexAlignStyleBuilder } from '@angular/flex-layout';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { AnyAaaaRecord } from 'dns';
 import { ProductService } from 'src/app/services/product.service';
 import { Data, AppService } from '../../app.service';
 import { comandModel } from '../cart/comandModel';
@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   count=1
   selectSize :FormGroup;
 
-  productSizeTab =[] as any
+  productSize =[] as any
   messageQuantity : any
 
   sizeComandTab:any
@@ -30,7 +30,12 @@ export class CartComponent implements OnInit {
   sizeObject:any
   comandObject : any
 
+  elementFound: any
 
+  productPrice=0
+totalCartPrice = 0
+
+  enabledQuantity = false
   ngOnInit() {
 
 
@@ -49,8 +54,9 @@ export class CartComponent implements OnInit {
    this.cartTab= JSON.parse(localStorage.getItem('cart') || '[]')
    console.log(this.cartTab);
 
-   this.cartTab.forEach(element => {
-     console.log(element.sizesQuantity);
+   this.cartTab.forEach(product => {
+     
+    this.totalCartPrice=this.totalCartPrice+(product.price -(product.price * (product.discount/100)))* product.cartCount
      
    });
 
@@ -60,29 +66,34 @@ export class CartComponent implements OnInit {
   }
 
 
-  changeSize(value,productId){
+  changeSize(value,i){
     console.log(value);
- this.sizeObject={
-  size : value,
-  id : productId
-}
-this.productSizeTab.push(this.sizeObject)
-console.log(this.productSizeTab);
+// if (value) {
+//   this.enabledQuantity=true
+// }
+console.log(i);
+
+this.cartTab[i].selectedSize=value
+localStorage.setItem('cart',JSON.stringify(this.cartTab))
 
   }
  
   public increment(i,product){
 
+    console.log(product);
+    console.log(i);
+    
 if (this.cartTab[i].cartCount == null ) {
         this.cartTab[i].cartCount=1
         this.cartTab[i].cartCount+=1
 
-   if (this.productSizeTab[i] != null) {
-  const elementFound = product.sizesQuantity.find(element=>element.size == this.productSizeTab[i])
+   if (product.selectedSize!=0) {
+  let elementFound = product.sizesQuantity.find(element=>element.size == product.selectedSize)
   
-        if (elementFound.quantity>= this.cartTab[i].cartCount) {
+        if (elementFound.quantity>= product.cartCount) {
            localStorage.setItem('cart',JSON.stringify(this.cartTab))
-           
+           this.alertEx=false
+
          }
          else{
          this.messageQuantity="The selected quantity is not available in the stock"
@@ -100,18 +111,27 @@ else{
       }
       else {
         this.cartTab[i].cartCount+=1
-        if (this.productSizeTab[i] != null) {
-          const elementFound = product.sizesQuantity.find(element=>element.size == this.productSizeTab[i])
+        console.log(this.cartTab[i].cartCount);
+        
+        if (product.seletedSize!=0) {
+           this.elementFound = product.sizesQuantity.find(element=>element.size ==product.selectedSize)
+          console.log(this.elementFound);
+          console.log(product.sizesQuantity);
           
-                if (elementFound.quantity>= this.cartTab[i].cartCount) {
+                if (this.elementFound.quantity>=  this.cartTab[i].cartCount) {
                    localStorage.setItem('cart',JSON.stringify(this.cartTab))
-                   console.log(this.productSizeTab[i] , elementFound.quantity);                  
+                   console.log(product.selectedSize , this.elementFound.quantity);     
+                   this.alertEx=false
+             
                  }
+
+
                  else{
                  this.messageQuantity="The selected quantity is not available in the stock"
                  this.alertEx=true
                  console.log(this.messageQuantity); 
                  }
+                 
         }
         else{
           this.messageQuantity="Select a size before"
@@ -120,7 +140,7 @@ else{
         }
       }
 
-      console.log(this.productSizeTab);
+      console.log(product.selectedSize);
       
     }
         
@@ -130,20 +150,22 @@ else{
 
 
 
-    decrement(i,product) {
-      if (this.cartTab[i].cartCount == null ) {
+ decrement(i,product) {
+    
+    console.log(product);
+    console.log(i);
+    
+if (this.cartTab[i].cartCount == null ) {
         this.cartTab[i].cartCount=1
         this.cartTab[i].cartCount-=1
 
-   if (this.productSizeTab[i] != null) {
-  const elementFound = product.sizesQuantity.find(element=>element.size == this.productSizeTab[i])
+   if (product.selectedSize!=0) {
+  let elementFound = product.sizesQuantity.find(element=>element.size == product.selectedSize)
   
-        if (elementFound.quantity>= this.cartTab[i].cartCount) {
+        if (elementFound.quantity>= product.cartCount) {
            localStorage.setItem('cart',JSON.stringify(this.cartTab))
-           console.log('aaa');
            this.alertEx=false
 
-           
          }
          else{
          this.messageQuantity="The selected quantity is not available in the stock"
@@ -161,15 +183,21 @@ else{
       }
       else {
         this.cartTab[i].cartCount-=1
-        if (this.productSizeTab[i] != null) {
-          const elementFound = product.sizesQuantity.find(element=>element.size == this.productSizeTab[i])
+        console.log(this.cartTab[i].cartCount);
+        
+        if (product.seletedSize!=0) {
+           this.elementFound = product.sizesQuantity.find(element=>element.size ==product.selectedSize)
+          console.log(this.elementFound);
+          console.log(product.sizesQuantity);
           
-                if (elementFound.quantity>= this.cartTab[i].cartCount) {
-                  this.alertEx=false
+                if (this.elementFound.quantity>=  this.cartTab[i].cartCount) {
                    localStorage.setItem('cart',JSON.stringify(this.cartTab))
-                   console.log(this.productSizeTab[i] , elementFound.quantity);  
-                
+                   console.log(product.selectedSize , this.elementFound.quantity); 
+                   this.alertEx=false
+                 
                  }
+
+
                  else{
                  this.messageQuantity="The selected quantity is not available in the stock"
                  this.alertEx=true
@@ -182,7 +210,11 @@ else{
           console.log(this.messageQuantity);
         }
       }
+
+      console.log(product.selectedSize);
+      
     }
+  
 
   public updateCart(value){
     if(value){
@@ -248,17 +280,14 @@ else{
   toCheckOut (){
      
 
-    this.productSizeTab.forEach((element, i) => {
-      console.log(element,i);
-    this.productService.sharedDataComand.push(element)
-if (element.size) {
+    this.cartTab.forEach((element, i) => {
+if (element.selectedSize!=0) {
   this.router.navigateByUrl('/checkout')}
 else {
   this.messageQuantity=" Please select a size"
 }
 });
 
-console.log(this.productService.sharedDataComand);
 
 
 }

@@ -7,7 +7,8 @@ import { environment } from 'src/environments/environment';
 
 export class ProductService {
   sharedDataComand= []as any
-  
+  sharedDataCart=JSON.parse(localStorage.getItem('cart') || '[]')
+
 
    baseURL= environment.baseURL
   constructor(public http:HttpClient) { }
@@ -39,4 +40,18 @@ export class ProductService {
    }
 
    
+
+   getProductById(id){
+     return this.http.get(this.baseURL+ '/products/productById/'+id)
+   }
+
+   updateProductAfterComfirmation(id,updatedProduct){
+     return this.http.put(this.baseURL + '/products/updateAfterComfirmation/'+ id,updatedProduct)
+   }
+
+
+   postCmd(data){
+          return this.http.post(this.baseURL + '/products/postCmd',data)
+
+   }
 }

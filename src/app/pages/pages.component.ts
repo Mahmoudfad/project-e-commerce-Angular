@@ -4,6 +4,8 @@ import { Settings, AppSettings } from '../app.settings';
 import { AppService } from '../app.service';
 import { Category, Product } from '../app.models';
 import { SidenavMenuService } from '../theme/components/sidenav-menu/sidenav-menu.service';
+import { environment } from 'src/environments/environment';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-pages',
@@ -22,11 +24,20 @@ export class PagesComponent implements OnInit {
   constructor(public appSettings:AppSettings, 
               public appService:AppService, 
               public sidenavMenuService:SidenavMenuService,
-              public router:Router) { 
+              public router:Router,
+              public ProductService : ProductService) { 
     this.settings = this.appSettings.settings; 
   }
-
+cartTab
+baseURL=environment.baseURL
+totalePrice=0
   ngOnInit() {
+
+    this.cartTab= JSON.parse(localStorage.getItem('cart') || '[]')
+    this.ProductService.sharedDataCart
+    console.log(this.ProductService.sharedDataCart);
+    
+
     this.getCategories();
     this.sidenavMenuItems = this.sidenavMenuService.getSidenavMenuItems();
   } 
