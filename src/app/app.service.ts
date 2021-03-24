@@ -20,6 +20,7 @@ export class AppService {
 categorieSubject =new BehaviorSubject<string>(null);
 genderSubject = new BehaviorSubject<string>(null);
 topProductSubject= new BehaviorSubject<string>(null);
+shoppingCartSubject = new BehaviorSubject<[]>([]);
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -140,7 +141,7 @@ public getOnSaleProducts():Observable<any[]>{
         else{           
             this.cartTab.push(product);
             localStorage.setItem('cart', JSON.stringify(this.cartTab))
-            
+            this.shoppingCartSubject.next(this.cartTab)
         }      
         console.log(this.cartTab);
           

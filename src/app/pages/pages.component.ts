@@ -30,12 +30,14 @@ export class PagesComponent implements OnInit {
   }
 cartTab
 baseURL=environment.baseURL
-totalePrice=0
+totalePrice=0;
+dataLength
   ngOnInit() {
     console.log("z");
     
 
     this.cartTab= JSON.parse(localStorage.getItem('cart') || '[]')
+    this.dataLength=this.appService.shoppingCartSubject.next(this.cartTab)
     this.ProductService.sharedDataCart
     console.log(this.ProductService.sharedDataCart);
     
