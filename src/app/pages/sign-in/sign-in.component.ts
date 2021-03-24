@@ -35,13 +35,13 @@ export class SignInComponent implements OnInit {
 
   public onLoginFormSubmit(values:Object):void {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe((res)=>{
+      this.authService.login(this.loginForm.value).subscribe((res:any)=>{
        if(JSON.parse(JSON.stringify(res)).message=='Auth failed'){
         this.snackBar.open('verif pass or email', '×', { panelClass: 'warn', verticalPosition: 'top', duration: 3000 });
        
        }
        else{
-        localStorage.setItem('connectedUser',JSON.stringify(res));
+        localStorage.setItem('token',JSON.stringify(res.token));
         this.router.navigateByUrl('/')
        }
         

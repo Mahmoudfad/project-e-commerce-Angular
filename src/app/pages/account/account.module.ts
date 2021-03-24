@@ -19,7 +19,7 @@ import { ModalComponent } from './list-product/modal/modal.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DetailsContactComponent } from './contacts/details-contact/details-contact.component';
-
+import {AdminGuardService as AdminGuardService } from 'src/app/services/admin-guard.service';
 
 export const routes = [
   { 
@@ -27,16 +27,16 @@ export const routes = [
       component: AccountComponent, children: [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: DashboardComponent, data: {  breadcrumb: 'Dashboard' } },
-          { path: 'information', component: InformationComponent, data: {  breadcrumb: 'Information' } },
+          { path: 'information', component: InformationComponent, data: {  breadcrumb: 'Information' }  },
           { path: 'addresses', component: AddressesComponent, data: {  breadcrumb: 'Addresses' } },
-          { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' } },
-          { path: 'admin', component: AdminComponent, data: {  breadcrumb: 'admin' } },
-          { path: 'addProduct', component: AddProductComponent, data: {  breadcrumb: 'addProduct' } },
-          { path:'listProduct',component:ListProductComponent,data:{breadcrumb:'listProduct'} },
-          { path:'contacts',component:ContactsComponent,data:{breadcrumb:'contacts'} },
+          { path: 'orders', component: OrdersComponent, data: {  breadcrumb: 'Orders' },canActivate: [AdminGuardService] },
+          { path: 'admin', component: AdminComponent, data: {  breadcrumb: 'admin' },canActivate: [AdminGuardService] },
+          { path: 'addProduct', component: AddProductComponent, data: {  breadcrumb: 'addProduct' },canActivate: [AdminGuardService] },
+          { path:'listProduct',component:ListProductComponent,data:{breadcrumb:'listProduct'},canActivate: [AdminGuardService] },
+          { path:'contacts',component:ContactsComponent,data:{breadcrumb:'contacts'},canActivate: [AdminGuardService] },
 
       ]
-      
+
   }
 ];
 

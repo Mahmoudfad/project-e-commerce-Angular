@@ -7,6 +7,7 @@ import { Product, Category } from "../../app.models";
 import { Settings, AppSettings } from 'src/app/app.settings';
 import { environment } from 'src/environments/environment';
 import { ProductService } from 'src/app/services/product.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -69,7 +70,8 @@ export class ProductsComponent implements OnInit {
     public appService: AppService,
     private ProductService: ProductService,
     public dialog: MatDialog,
-    private router: Router) {
+    private router: Router,
+    private authService : AuthService) {
     this.settings = this.appSettings.settings;
   }
 
@@ -78,6 +80,7 @@ export class ProductsComponent implements OnInit {
   gender;
 
   ngOnInit() {
+    console.log(this.authService.getToken());
     
     this.categorie = this.activatedRoute.snapshot.paramMap.get('categorie')
     this.appService.updatedCategorie(this.categorie);

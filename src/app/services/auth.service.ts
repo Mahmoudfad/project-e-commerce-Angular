@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
    baseURL= environment.baseURL
-  constructor(public http:HttpClient, public jwtHelper: JwtHelperService) { }
+  constructor(public http:HttpClient) { }
 
   login(data)
   {
@@ -30,7 +30,7 @@ export class AuthService {
   // }
 
   public getToken(): string {
-    return JSON.parse(localStorage.getItem('connectedUser')).token;
+    return JSON.parse(localStorage.getItem('token'))
   }
   // public isAuthenticated(): boolean {
   //   // get the token
@@ -44,12 +44,11 @@ export class AuthService {
 
   //gard : 
 
-  // public isAuthenticated(): boolean {
-  //   const token = localStorage.getItem('token');
-  //   // Check whether the token is expired and return
-  //   // true or false
-  //   return !this.jwtHelper.isTokenExpired(token);
+  public isAuthenticated() : boolean {
+    const token = JSON.parse(JSON.stringify(localStorage.getItem('token'))) 
+    console.log(token);
+    return token == null ;
   }
 
-
+}
 
