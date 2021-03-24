@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import decode from 'jwt-decode';
 
 @Component({
   selector: 'app-account',
@@ -10,6 +11,7 @@ export class AccountComponent implements OnInit {
   @ViewChild('sidenav', { static: true }) sidenav: any;
   public sidenavOpen:boolean = true;
   public links = [
+    { Name: 'Information', href :'information' , icon : 'info' }  ,
     { name: 'Add product', href: 'addProduct', icon: 'dashboard' },
     { name: 'All products', href: 'listProduct', icon: 'info'},
     { name: 'Contacts', href: 'contacts', icon: 'location_on',nbrNotif:0 },
@@ -17,10 +19,16 @@ export class AccountComponent implements OnInit {
     { name: 'Logout', href: '/sign-in', icon: 'power_settings_new'},    
   ];
   constructor(public router:Router) { }
-
+   tokenPayload : any
   ngOnInit() {
     if(window.innerWidth < 960){
       this.sidenavOpen = false;
+
+      const token = localStorage.getItem('token');
+    this.tokenPayload = decode(token);
+    console.log(this.tokenPayload);
+    
+
     };
 
   }
