@@ -28,10 +28,17 @@
         <a mat-button routerLink="/compare">Compare <span *ngIf="settings.rtl">&rlm;</span>({{appService.Data.compareList.length}})</a>
         <a mat-button routerLink="/wishlist">Wishlist <span *ngIf="settings.rtl">&rlm;</span>({{appService.Data.wishList.length}})</a>
     </span>  
+   
+        <span *ngIf="!authService.isLoginSubject.value">
+            <a mat-button routerLink="/sign-in"> <span (click)="authService.login()"></span>sign in</a>
+        </span>
+  
+    
 
-    <a mat-button [matMenuTriggerFor]="accountMenu" #accountMenuTrigger="matMenuTrigger">
+    <a  *ngIf="authService.isLoginSubject.value" mat-button [matMenuTriggerFor]="accountMenu" #accountMenuTrigger="matMenuTrigger">
         <mat-icon class="mat-icon-sm account-icon">person</mat-icon> <span fxShow="false" fxShow.gt-sm>account</span> <mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
     </a>
+    
     <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-dropdown account">
         <span (mouseleave)="accountMenuTrigger.closeMenu()">
             <div fxLayout="row" fxLayoutAlign="space-around center" class="user-info">                   
@@ -55,16 +62,17 @@
                 <mat-icon class="mat-icon-sm">lock</mat-icon>
                 <span>Lock screen</span> 
             </a>
-            <a mat-menu-item routerLink="/"> 
+            <a mat-menu-item routerLink="/"> ()
                 <mat-icon class="mat-icon-sm">help</mat-icon>
                 <span>Help</span> 
             </a>
             <div class="divider"></div>
-            <a mat-menu-item routerLink="/sign-in"> 
+            <a mat-menu-item routerLink="/sign-in" (click)="authService.logout()"> 
                 <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
                 <span>Sign Out</span> 
             </a>
         </span>
     </mat-menu>    
 
+  
 </div>  

@@ -16,17 +16,27 @@ export class ListProductComponent implements OnInit {
   ListProducts=[] as any;
   baseURL= environment.baseURL
   
-  constructor(private  http:AppService,public dialog: MatDialog) { }
+  constructor(private  http:AppService,public dialog: MatDialog) {
+
+    
+   }
   
   
   
   ngOnInit():void {
     
+
     
-this.http.getProducts().subscribe((res: any)=>{this.ListProducts=res},
+this.http.getProducts().subscribe((res: any)=>{this.ListProducts=res;
+console.log(res);
+},
 (erreur:any)=>{},
  ()=>
   {
+    console.log("finished");
+    console.log(this.ListProducts);
+    
+    
     this.ListProducts.forEach(element => {
     console.log(element._id);
     

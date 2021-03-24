@@ -12,7 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 export class AddProductComponent implements OnInit {
   productForm:FormGroup;
   file;
-  
+  ListCategories=[] as any;
   constructor(private productService: ProductService,private router: Router) { }
 files: File[] = [];
 
@@ -44,6 +44,12 @@ onRemove(event) {
           }),
         ])
       });
+
+
+      this.productService.getAllCategories().subscribe((res: any)=>{this.ListCategories=res},
+(erreur:any)=>{},
+()=>{}
+);
   }
 
 sq : any
@@ -66,6 +72,7 @@ a = 0
     
     const formData = new FormData();
 
+    console.log(this.productForm.get('categorie').value);
     
   
     formData.set('productName', this.productForm.get('productName').value);
@@ -90,8 +97,9 @@ a = 0
     err=>{},
     ()=>{console.log("product created");
     this.productForm.reset()
-    })
     this.router.navigateByUrl('/account/listProduct');
+    })
+  
   }
   remove(i){
     const sq = this.productForm.controls.sizesQuantity as FormArray

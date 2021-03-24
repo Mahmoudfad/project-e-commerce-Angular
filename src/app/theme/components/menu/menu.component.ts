@@ -9,10 +9,16 @@ import { ProductService } from 'src/app/services/product.service';
 export class MenuComponent implements OnInit {
   ListMens=[] as any;
   ListWomens=[] as any;
-
+  ListCategories=[] as any;
   constructor(private productService: ProductService) { }
 
   ngOnInit() { 
+this.productService.getAllCategories().subscribe((res: any)=>{this.ListCategories=res},
+(erreur:any)=>{},
+()=>{}
+);
+  
+
 //     this.productService.getMensProduct().subscribe((res: any)=>{this.ListMens=JSON.parse(JSON.stringify(res))},
 // (erreur:any)=>{},
 // ()=>{

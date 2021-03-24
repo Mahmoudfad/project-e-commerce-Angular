@@ -78,6 +78,8 @@ export class ProductsComponent implements OnInit {
   gender;
 
   ngOnInit() {
+    console.log("z");
+    
     
     this.categorie = this.activatedRoute.snapshot.paramMap.get('categorie')
     this.appService.updatedCategorie(this.categorie);
@@ -85,7 +87,8 @@ export class ProductsComponent implements OnInit {
     
     this.gender = this.activatedRoute.snapshot.paramMap.get('gender')
     this.appService.updatedGender(this.gender)
-    
+    console.log(this.gender);
+    console.log(this.categorie);
     this.getProductByCategory(this.appService.categorieSubject.value);
 
     if (this.gender && !this.categorie) {
@@ -97,10 +100,17 @@ export class ProductsComponent implements OnInit {
           console.log(this.products);
         });
     }
+
+    
+    
     else if (this.gender && this.categorie) {
 
 
-      this.ProductService.getProductByGenderAndCategory(this.gender, this.categorie).subscribe((res: any) => { this.products = res },
+      this.ProductService.getProductByGenderAndCategory(this.gender, this.categorie).subscribe((res: any) => { this.products = res 
+      console.log("zzz");
+      console.log(res);
+      
+      },
         (erreur: any) => { },
         () => {
           console.log(this.products);
@@ -154,6 +164,7 @@ export class ProductsComponent implements OnInit {
     //   console.log(data);
     // });
   }
+
 
   public getProductByCategoryAndGender(gender,categorie){
     this.appService.getProductByCategoryAndGender(gender,categorie).subscribe(data => {

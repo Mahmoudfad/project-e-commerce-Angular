@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Data, AppService } from '../../../app.service';
 import { Settings, AppSettings } from '../../../app.settings';
+import { AuthService } from "../../../services/auth.service";
+import { Observable } from "rxjs";
+
 
 @Component({
   selector: 'app-top-menu',
   templateUrl: './top-menu.component.html'
 })
 export class TopMenuComponent implements OnInit {
+  isLoggedIn : boolean
   public currencies = ['USD', 'EUR'];
   public currency:any;
   public flags = [
@@ -19,13 +23,19 @@ export class TopMenuComponent implements OnInit {
   public flag:any;
 
   public settings: Settings;
-  constructor(public appSettings:AppSettings, public appService:AppService) { 
+  constructor(public appSettings:AppSettings, public appService:AppService ,public authService : AuthService) { 
     this.settings = this.appSettings.settings; 
+  
+   
   } 
 
   ngOnInit() {
     this.currency = this.currencies[0];
     this.flag = this.flags[0];    
+   
+    this.isLoggedIn =JSON.parse(localStorage.getItem("isLogin")) 
+
+    
   }
 
   public changeCurrency(currency){
