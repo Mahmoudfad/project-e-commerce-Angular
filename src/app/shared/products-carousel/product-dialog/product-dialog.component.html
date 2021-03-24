@@ -5,9 +5,11 @@
     <div fxLayout="row wrap">
         <div fxFlex="100" fxFlex.gt-sm="50"> 
             <div class="swiper-container h-100" [swiper]="config">
-                <div class="swiper-wrapper">      
-                    <div *ngFor="let image of product.images" class="swiper-slide">
-                        <img [attr.data-src]="image.medium" class="swiper-lazy"/>
+                <div class="swiper-wrapper"> 
+                      
+                    <!-- <div *ngFor="let image of imageProduct" class="swiper-slide"> -->
+                        <div class="swiper-slide">
+                        <img src="{{baseURL}}/{{data?.imageProduct}}" class="swiper-lazy"/>
                         <div class="swiper-lazy-preloader"></div>
                     </div>
                 </div>
@@ -16,20 +18,30 @@
             </div>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="50" ngClass.gt-sm="px-2 m-0" ngClass.sm="mt-2" ngClass.xs="mt-2"> 
-            <h2>{{product.name}}</h2>
+            <h2>{{data.productName}}</h2>
             <div class="py-1 lh">
-                <p><span class="text-muted fw-500">Category: </span><span>{{ ( appService.Data.categories | filterById : product.categoryId )?.name }}</span></p>
-                <p><span class="text-muted fw-500">Availibility: </span><span>{{ (product.availibilityCount > 0) ? 'In stock':'Unavailable'}}</span></p>
+                <p><span class="text-muted fw-500">Gender: </span><span>{{data.gender}}</span></p>
+                <!-- <p><span class="text-muted fw-500">Availibility: </span><span>{{ (product.availibilityCount > 0) ? 'In stock':'Unavailable'}}</span></p> -->
+            </div> 
+            <div class="py-1 lh">
+                <p><span class="text-muted fw-500">Category: </span><span>{{data.categorie}}</span></p>
+                <!-- <p><span class="text-muted fw-500">Availibility: </span><span>{{ (product.availibilityCount > 0) ? 'In stock':'Unavailable'}}</span></p> -->
             </div>                 
-            <div class="py-1">
+            <!-- <div class="py-1">
                 <app-rating [ratingsCount]="product.ratingsCount" [ratingsValue]="product.ratingsValue" [direction]="'row'"></app-rating>
-            </div>
-            <p class="py-1 text-muted lh">{{product.description}}</p>
+            </div> -->
+            <p><span class="text-muted fw-500">Description: </span>
+            <span class="py-1 text-muted lh">{{data.description}}</span></p>
+            <p><span class="text-muted fw-500">Availibility: </span></p>
+            <span *ngFor="let element of data?.sizesQuantity ">
+                <p><span class="text-muted fw-500">Size </span></p><p style="color: forestgreen;">{{element.size}}  </p> 
+              </span>
+            
             <div fxLayoutAlign="end center" class="text-muted">                 
                  <button [mat-dialog-close]="product" mat-icon-button matTooltip="View full details"><mat-icon>arrow_forward</mat-icon></button>               
             </div>              
             <div class="divider"></div>
-            <h2 class="mt-2 new-price">${{product.newPrice}}</h2>
+            <!-- <h2 class="mt-2 new-price">${{product.newPrice}}</h2> -->
             <app-controls [product]="product" [type]="'all'"></app-controls>
         </div>
     </div>

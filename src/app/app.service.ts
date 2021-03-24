@@ -20,6 +20,7 @@ export class AppService {
 categorieSubject =new BehaviorSubject<string>(null);
 genderSubject = new BehaviorSubject<string>(null);
 topProductSubject= new BehaviorSubject<string>(null);
+shoppingCartSubject = new BehaviorSubject<[]>([]);
     public Data = new Data(
         [], // categories
         [], // compareList
@@ -29,16 +30,18 @@ topProductSubject= new BehaviorSubject<string>(null);
         0 //totalCartCount
     )
 
-   public cartTab= []
+   public cartTab= JSON.parse(localStorage.getItem('cart')) || []
     public url = "assets/data/";
     baseURL= environment.baseURL
 
     constructor(public http:HttpClient, public snackBar: MatSnackBar) { }
 
 public getTopProducts():Observable<any[]>{
-return this.http.get<any[]>(this.baseURL + 'products/getTopProducts/');
+return this.http.get<any[]>(this.baseURL + '/products/getTopProducts/');
 }
-
+public getOnSaleProducts():Observable<any[]>{
+    return this.http.get<any[]>(this.baseURL + '/products/getOnSaleProducts/');
+    }
     public getSizeByProduct(productId): Observable<any[]>{
         return this.http.get<any[]>(this.baseURL + '/products/getSizeByProduct/'+productId);
     }
@@ -124,6 +127,7 @@ return this.http.get<any[]>(this.baseURL + 'products/getTopProducts/');
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
     } 
 
+
     public addToCart(product:any){
         let message, status;        
        
@@ -137,7 +141,7 @@ return this.http.get<any[]>(this.baseURL + 'products/getTopProducts/');
         else{           
             this.cartTab.push(product);
             localStorage.setItem('cart', JSON.stringify(this.cartTab))
-            
+            this.shoppingCartSubject.next(this.cartTab)
         }      
         console.log(this.cartTab);
           

@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { Data, AppService } from '../../../app.service';
 import { Product } from '../../../app.models';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-dialog',
@@ -10,13 +11,21 @@ import { Product } from '../../../app.models';
   styleUrls: ['./product-dialog.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class ProductDialogComponent implements OnInit {
   public config: SwiperConfigInterface = {};
   constructor(public appService:AppService, 
               public dialogRef: MatDialogRef<ProductDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public product: Product) { }
+              @Inject(MAT_DIALOG_DATA) public data: Product) { }
 
-  ngOnInit() { }
+
+baseURL = environment.baseURL;
+
+  ngOnInit() { 
+    console.log(this.data);
+   
+    
+   }
 
   ngAfterViewInit(){
     this.config = {

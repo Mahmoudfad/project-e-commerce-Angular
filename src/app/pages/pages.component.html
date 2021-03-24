@@ -52,6 +52,10 @@
                 </form>
             </div>  
 
+
+
+
+
             <!-- //shopping -->
 
             <div fxFlex="20" fxLayout="row" fxLayoutAlign="end center">   
@@ -61,11 +65,11 @@
                         <span *ngIf="cartTab > 0" class="cart-items-count">{{cartTab.length}}</span>
                         <div fxLayout="column" fxLayoutAlign="center center" fxShow="false" fxShow.gt-xs class="top-cart">
                             <span>Shopping Cart</span>
-                            <span *ngIf="appService.Data.totalCartCount > 0">
-                                <bdi>{{cartTab.length}} item<span *ngIf="cartTab > 1">s</span> - 
+                            <span *ngIf="appService.shoppingCartSubject.value.length > 0">
+                                <bdi>{{appService.shoppingCartSubject.value.length}} item<span *ngIf="cartTab > 1">s</span> - 
                                     <!-- $<span>{{appService.Data.totalPrice | number : '1.2-2'}}</span> -->
                                 </bdi>
-                            </span>
+                            </span> 
                         </div>
                         <mat-icon class="mat-icon-sm">arrow_drop_down</mat-icon>
                     </button>
@@ -73,16 +77,16 @@
                         <ng-template matMenuContent>
                             <span (mouseleave)="cartMenuTrigger.closeMenu()" class="d-block">
                                 <div fxLayout="row" fxLayoutAlign="space-between center" class="text-muted">
-                                    <b><span>{{cartTab.length}} ITEM<span *ngIf="cartTab.length > 1">S</span></span></b>
+                                    <b><span>{{appService.shoppingCartSubject.value.length}} ITEM<span *ngIf="cartTab.length > 1">S</span></span></b>
                                     <b><a [routerLink]="['/cart']" class="text-muted">VIEW CART</a></b>
                                 </div>
                                 <div class="divider mt-1"></div>
                                 <div *ngIf="cartTab.length == 0" class="py-1 text-muted text-center">You have no items in your shopping cart.</div>
                                 <mat-list>
                                     <mat-list-item *ngFor="let product of cartTab">                                   
-                                        <h3 matLine class="text-muted"> {{product.productName}} </h3>
+                                        <h3 matLine class="text-muted"> {{product?.productName}} </h3>
                                         <p matLine class="text-muted">
-                                            <bdi>{{product.cartCount}} x ${{product.price | number : '1.2-2'}}</bdi>
+                                            <bdi>{{product?.cartCount}} x ${{product?.price | number : '1.2-2'}}</bdi>
                                         </p>
                                         <img  src="{{baseURL}}/{{product?.imageProduct}}" alt="image">
                                         <button mat-icon-button color="warn" class="remove" (click)="remove(product);stopClickPropagate($event)" matTooltip="Remove" matTooltipPosition="before">
@@ -111,6 +115,12 @@
                         </ng-template>
                     </mat-menu>
                 </div> 
+
+
+
+
+
+
 
 
                 <div fxLayoutAlign="center center" fxHide="false" fxHide.gt-sm> 
