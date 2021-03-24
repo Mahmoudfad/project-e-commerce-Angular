@@ -128,6 +128,7 @@ public getOnSaleProducts():Observable<any[]>{
         this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
     } 
 
+
     public addToCart(product:any){
         let message, status;        
        
