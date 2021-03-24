@@ -36,6 +36,7 @@ export const routes = [
           { path:'contacts',component:ContactsComponent,data:{breadcrumb:'contacts'} },
 
       ]
+      
   }
 ];
 
