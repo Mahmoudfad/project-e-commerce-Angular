@@ -29,7 +29,7 @@ topProductSubject= new BehaviorSubject<string>(null);
         0 //totalCartCount
     )
 
-   public cartTab= []
+   public cartTab= JSON.parse(localStorage.getItem('cart')) || []
     public url = "assets/data/";
     baseURL= environment.baseURL
 

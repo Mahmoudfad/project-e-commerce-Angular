@@ -32,6 +32,8 @@ cartTab
 baseURL=environment.baseURL
 totalePrice=0
   ngOnInit() {
+    console.log("z");
+    
 
     this.cartTab= JSON.parse(localStorage.getItem('cart') || '[]')
     this.ProductService.sharedDataCart
