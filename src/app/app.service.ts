@@ -71,7 +71,7 @@ return this.http.get<any[]>(this.baseURL + 'products/getTopProducts/');
         return this.http.get( this.baseURL + '/products/getProductsCategory/'+ categorie)
     }
     public getProductByGender(gender){
-        return this.http.get( this.baseURL + '/getProductsByGender/'+ gender)
+        return this.http.get( this.baseURL + '/products/getProductsByGender/'+ gender)
     }
 
     updatedGender(gender){
