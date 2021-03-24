@@ -1,8 +1,26 @@
-<div *ngFor="let category of mainCategories">
+<!-- <div *ngFor="let category of mainCategories">
     <button mat-menu-item (click)="changeCategory($event)">
         <span>{{category.name}}</span>
     </button>
      <div *ngIf="category.hasSubCategory" class="sub-category">
         <app-category-list [categories]="categories" [categoryParentId]="category.id" (change)="changeCategory($event)"></app-category-list>
     </div>
+</div> -->
+<!-- <a mat-menu-item routerLink="/products/female/rfgd">Boots</a>
+<a mat-menu-item routerLink="/products/male/boots">Boots</a> -->
+Female
+<div *ngFor =" let cat of ListCategories">
+    <button mat-menu-item  (click)="navigation('female',cat._id)">
+        <span>{{cat.categorie}}</span>
+        
+    
+    </button>
+</div>
+Male 
+<div *ngFor =" let cat of ListCategories">
+    <button mat-menu-item  (click)="navigation('male',cat._id)">
+        <span>{{cat.categorie}}</span>
+        
+    
+    </button>
 </div>

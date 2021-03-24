@@ -35,6 +35,11 @@ export class ProductService {
     return this.http.get( this.baseURL + '/products/getProductsByGender/'+gender)
    }
 
+   getAllCategories(){
+    return this.http.get( this.baseURL + '/categorie/getAllCategorie')
+   }
+
+   
 
    getProductById(id){
      return this.http.get(this.baseURL+ '/products/productById/'+id)

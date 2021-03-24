@@ -41,8 +41,12 @@ export class SignInComponent implements OnInit {
        
        }
        else{
-        localStorage.setItem('token',JSON.stringify(res.token));
+        localStorage.setItem('token',JSON.stringify(res));
+        this.authService.isLoginSubject.next(true)
+        localStorage.setItem("isLogin",JSON.stringify(this.authService.isLoginSubject.value))
+        
         this.router.navigateByUrl('/')
+       
        }
         
       

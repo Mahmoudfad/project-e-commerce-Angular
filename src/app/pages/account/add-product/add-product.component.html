@@ -19,13 +19,13 @@
   
     <mat-form-field appearance="fill">
       <mat-label>Categorie</mat-label>
-      <mat-select formControlName="categorie">
-        <mat-option value="sneakers">Sneakers</mat-option>
-        <mat-option value="sandals">Sandals</mat-option>
+      <mat-select formControlName="categorie" >
+        <mat-option  *ngFor =" let cat of ListCategories" [value]="cat._id">{{cat.categorie}}</mat-option>
+        <!-- <mat-option value="sandals">Sandals</mat-option>
         <mat-option value="casual">Casual shoes</mat-option>
         <mat-option value="boots">Boots</mat-option>
         <mat-option value="running">Running</mat-option>
-        <mat-option value="basket">Basket</mat-option>
+        <mat-option value="basket">Basket</mat-option> -->
       </mat-select>
     </mat-form-field><br>
   
