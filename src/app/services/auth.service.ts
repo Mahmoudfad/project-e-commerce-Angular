@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
 import { JwtHelperService } from '@auth0/angular-jwt';
-=======
 import { BehaviorSubject, Observable } from 'rxjs';
->>>>>>> 117f90a434ef003c16d0d836a254ec75c7c11b8e
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,15 +13,8 @@ export class AuthService {
   //   return !!localStorage.getItem('token');
   // }
    baseURL= environment.baseURL
-<<<<<<< HEAD
   constructor(public http:HttpClient, public jwtHelper: JwtHelperService) { }
 
-=======
-  constructor(public http:HttpClient) { }
-  // isLoggedIn() : Observable<boolean> {
-  //   return this.isLoginSubject.asObservable();
-  //  }
->>>>>>> 117f90a434ef003c16d0d836a254ec75c7c11b8e
   login(data)
   {
      return this.http.post(this.baseURL + '/users/login', data)
@@ -55,7 +45,6 @@ export class AuthService {
   //   return this.http.get( this.baseURL + '/users/userCreate',data)
   // }
 
-<<<<<<< HEAD
   public getToken(): string {
     return JSON.parse(localStorage.getItem('connectedUser')).token;
   }
@@ -81,11 +70,3 @@ export class AuthService {
 
 
 
-=======
-  // getLoginButton(){
-  //   this.loginSubject.next(true)
-  //   return this.http.post(this.baseURL + '/users/login', data)
-
-  // }
-}
->>>>>>> 117f90a434ef003c16d0d836a254ec75c7c11b8e
