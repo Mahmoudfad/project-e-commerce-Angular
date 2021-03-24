@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -46,9 +47,26 @@ export class AuthService {
   //   return this.http.get( this.baseURL + '/users/userCreate',data)
   // }
 
-  // getLoginButton(){
-  //   this.loginSubject.next(true)
-  //   return this.http.post(this.baseURL + '/users/login', data)
-
+  public getToken(): string {
+    return JSON.parse(localStorage.getItem('token'))
+  }
+  // public isAuthenticated(): boolean {
+  //   // get the token
+  //   const token = this.getToken();
+  //   // return a boolean reflecting 
+  //   // whether or not the token is expired
+  //   return tokenNotExpired(null, token);
   // }
+
+
+
+  //gard : 
+
+  public isAuthenticated() : boolean {
+    const token = JSON.parse(JSON.stringify(localStorage.getItem('token'))) 
+    console.log(token);
+    return token == null ;
+  }
+
 }
+
