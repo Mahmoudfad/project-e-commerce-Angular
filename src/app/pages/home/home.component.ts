@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../app.service';
 import { Product } from "../../app.models";
+import decode from 'jwt-decode';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +32,7 @@ export class HomeComponent implements OnInit {
     // this.getBanners();
     // this.getProducts("featured");
     // this.getBrands();
+    
   }
 
   public onLinkClick(e){

@@ -15,6 +15,9 @@ export class AuthService {
    baseURL= environment.baseURL
   constructor(public http:HttpClient) { }
 
+  // isLoggedIn() : Observable<boolean> {
+  //   return this.isLoginSubject.asObservable();
+  //  }
   login(data)
   {
      return this.http.post(this.baseURL + '/users/login', data)
@@ -46,7 +49,7 @@ export class AuthService {
   // }
 
   public getToken(): string {
-    return JSON.parse(localStorage.getItem('connectedUser')).token;
+    return JSON.parse(localStorage.getItem('token'))
   }
   // public isAuthenticated(): boolean {
   //   // get the token
@@ -60,14 +63,11 @@ export class AuthService {
 
   //gard : 
 
-  public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    // Check whether the token is expired and return
-    // true or false
-    return true;
-    //return !this.jwtHelper.isTokenExpired(token);
-  }
+  public isAuthenticated() : boolean {
+    const token = JSON.parse(JSON.stringify(localStorage.getItem('token'))) 
+    console.log(token);
+    return token == null ;
   }
 
-
+}
 
