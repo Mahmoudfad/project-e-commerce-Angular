@@ -107,7 +107,9 @@ export class ProductsComponent implements OnInit {
     else if (this.gender && this.categorie) {
 
 
-      this.ProductService.getProductByGenderAndCategory(this.gender, this.categorie).subscribe((res: any) => { this.products = res 
+      this.ProductService.getProductByGenderAndCategory(this.gender, this.categorie).subscribe((res: any) => { 
+        this.products = res 
+        // this.ProductService.listProductsSubject.next(res)
       console.log("zzz");
       console.log(res);
       
@@ -169,8 +171,7 @@ export class ProductsComponent implements OnInit {
 
   public getProductByCategoryAndGender(gender,categorie){
     this.appService.getProductByCategoryAndGender(gender,categorie).subscribe(data => {
-    
-      
+
       this.products = data;
      
     });
@@ -251,13 +252,17 @@ export class ProductsComponent implements OnInit {
   }
 
   public onChangeCategory(event) {
+  console.log(event);
+  
+    
     if (event.target) {
      
-      this.appService.genderSubject.next(event.target.innerText.toLowerCase())
-      this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
-      this.getProductByGender(this.appService.genderSubject.value)
-      this.getProductByCategory(this.appService.categorieSubject.value)
-
+    this.gender=  this.appService.genderSubject.next(event.target.innerText.toLowerCase())
+     this.categorie= this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
+     this.appService.getProductByCategoryAndGender(this.gender,this.categorie ).subscribe(
+       res=>{ this.products = res}, err=>{console.log(err);
+       }
+     )
     }
   }
 

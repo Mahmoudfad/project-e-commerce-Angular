@@ -29,7 +29,8 @@ export class CategoryListComponent implements OnInit {
 );
   }
   navigation(gender,categorie){
-    location.replace('http://localhost:4200/products/'+gender+'/'+categorie)
+    this.router.navigateByUrl('products/'+gender+'/'+categorie)
+    
   }
 
   public ngDoCheck() {

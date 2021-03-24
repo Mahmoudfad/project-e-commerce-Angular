@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class ProductService {
   sharedDataComand= []as any
   sharedDataCart=JSON.parse(localStorage.getItem('cart') || '[]')
-
+  // listProductsSubject = new BehaviorSubject<[]>([])
 
    baseURL= environment.baseURL
   constructor(public http:HttpClient) { }
