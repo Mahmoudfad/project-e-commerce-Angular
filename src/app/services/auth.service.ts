@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
    baseURL= environment.baseURL
-  constructor(public http:HttpClient) { }
+  constructor(public http:HttpClient, public jwtHelper: JwtHelperService) { }
 
   login(data)
   {
@@ -27,4 +28,28 @@ export class AuthService {
   // getUsers(data){
   //   return this.http.get( this.baseURL + '/users/userCreate',data)
   // }
-}
+
+  public getToken(): string {
+    return JSON.parse(localStorage.getItem('connectedUser')).token;
+  }
+  // public isAuthenticated(): boolean {
+  //   // get the token
+  //   const token = this.getToken();
+  //   // return a boolean reflecting 
+  //   // whether or not the token is expired
+  //   return tokenNotExpired(null, token);
+  // }
+
+
+
+  //gard : 
+
+  // public isAuthenticated(): boolean {
+  //   const token = localStorage.getItem('token');
+  //   // Check whether the token is expired and return
+  //   // true or false
+  //   return !this.jwtHelper.isTokenExpired(token);
+  }
+
+
+
