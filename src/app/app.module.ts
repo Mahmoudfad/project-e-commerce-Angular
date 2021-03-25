@@ -28,6 +28,7 @@ import { FooterComponent } from './theme/components/footer/footer.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { TokenInterceptor } from './services/token-interceptor.service';
 
 
 @NgModule({
@@ -63,7 +64,9 @@ MatButtonModule,
     AppService,   
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     { provide: MAT_MENU_SCROLL_STRATEGY, useFactory: menuScrollStrategy, deps: [Overlay] },
-    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true}
   ],
   bootstrap: [AppComponent]
 })

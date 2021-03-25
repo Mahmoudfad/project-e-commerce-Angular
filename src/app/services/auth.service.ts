@@ -48,7 +48,7 @@ export class AuthService {
   // }
 
   public getToken(): string {
-    return JSON.parse(localStorage.getItem('token'))
+    return JSON.parse(localStorage.getItem('token')).token
   }
   // public isAuthenticated(): boolean {
   //   // get the token
@@ -67,6 +67,22 @@ export class AuthService {
     console.log(token);
     return token == null ;
   }
+
+
+
+
+
+  getUser(id)
+  {
+     return this.http.get(this.baseURL + '/users/getUser/'+ id)
+  }
+
+
+
+
+
+
+
 
 }
 
