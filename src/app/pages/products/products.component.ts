@@ -78,10 +78,11 @@ export class ProductsComponent implements OnInit {
   baseURL = environment.baseURL
   categorie;
   gender;
-
+isConnected :any
+category:any
   ngOnInit() {
     console.log(this.authService.getToken());
-    
+     
     this.categorie = this.activatedRoute.snapshot.paramMap.get('categorie')
     this.appService.updatedCategorie(this.categorie);
     
@@ -252,17 +253,29 @@ export class ProductsComponent implements OnInit {
   }
 
   public onChangeCategory(event) {
-  console.log(event);
+  console.log(event.target.innerText.toLowerCase());
   
     
     if (event.target) {
+     this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
+     this.categorie= this.appService.categorieSubject.value
+   
      
-    this.gender=  this.appService.genderSubject.next(event.target.innerText.toLowerCase())
-     this.categorie= this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
-     this.appService.getProductByCategoryAndGender(this.gender,this.categorie ).subscribe(
-       res=>{ this.products = res}, err=>{console.log(err);
-       }
-     )
+     this.ProductService.getCategoryByName(this.categorie).subscribe((res:any)=>{
+       this.category=res
+     })
+     this.ProductService.getGenderByName(this.categorie).subscribe((res:any)=>{
+      this.category=res
+    })
+    //  this.appService.getProductByCategoryAndGender(this.gender,this.categorie ).subscribe(
+    //    res=>{
+    //      console.log("res");
+         
+    //     console.log(res);
+         
+    //     this.products = res}, err=>{console.log(err);
+    //    }
+    //  )
     }
   }
 

@@ -11,8 +11,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Gender</mat-label>
       <mat-select formControlName="gender">
-        <mat-option value="male">Male</mat-option>
-        <mat-option value="female">Female</mat-option>
+        <mat-option *ngFor =" let gender of ListGender" [value]="gender._id">{{gender.name}}</mat-option>
+        <!-- <mat-option value="female">Female</mat-option> -->
       </mat-select>
     </mat-form-field><br>
   
@@ -20,7 +20,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Categorie</mat-label>
       <mat-select formControlName="categorie" >
-        <mat-option  *ngFor =" let cat of ListCategories" [value]="cat._id">{{cat.categorie}}</mat-option>
+        <mat-option  *ngFor =" let cat of ListCategories" [value]="cat._id">{{cat.name}}</mat-option>
         <!-- <mat-option value="sandals">Sandals</mat-option>
         <mat-option value="casual">Casual shoes</mat-option>
         <mat-option value="boots">Boots</mat-option>

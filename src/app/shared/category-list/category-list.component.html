@@ -11,7 +11,7 @@
 Female
 <div *ngFor =" let cat of ListCategories">
     <button mat-menu-item  (click)="navigation('female',cat._id)">
-        <span>{{cat.categorie}}</span>
+        <span>{{cat.name}}</span>
         
     
     </button>
@@ -19,7 +19,7 @@ Female
 Male 
 <div *ngFor =" let cat of ListCategories">
     <button mat-menu-item  (click)="navigation('male',cat._id)">
-        <span>{{cat.categorie}}</span>
+        <span>{{cat.name}}</span>
         
     
     </button>
