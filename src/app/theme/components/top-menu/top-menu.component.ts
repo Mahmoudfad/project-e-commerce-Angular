@@ -45,7 +45,11 @@ export class TopMenuComponent implements OnInit {
   public changeLang(flag){
     this.flag = flag;
   }
-
+logout(){
+  localStorage.removeItem('token');
+  this.authService.isLoginSubject.next(false);
+  localStorage.setItem("isLogin",JSON.stringify(this.authService.isLoginSubject.value))
+}
   
 
 }

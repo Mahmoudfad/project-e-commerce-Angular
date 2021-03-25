@@ -38,10 +38,7 @@ export class AuthService {
     this.isLoginSubject.next(true); 
     
    }
-   logout() {
-    localStorage.removeItem('token');
-    this.isLoginSubject.next(false);
-  }
+ 
 
  
   // getUsers(data){
