@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { AccountComponent } from './account.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from '../ClientSettings/dashboard.component';
 import { InformationComponent } from './information/information.component';
 import { AddressesComponent } from './addresses/addresses.component';
 import { OrdersComponent } from './orders/orders.component';

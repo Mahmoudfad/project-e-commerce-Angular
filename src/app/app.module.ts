@@ -29,6 +29,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { TokenInterceptor } from './services/token-interceptor.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { TokenInterceptor } from './services/token-interceptor.service';
 MatButtonModule,
     
     SharedModule,
+    
     FormsModule, ReactiveFormsModule,
     routing
   ],
@@ -61,6 +63,7 @@ MatButtonModule,
   ], 
   providers: [
     AppSettings,
+    
     AppService,   
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     { provide: MAT_MENU_SCROLL_STRATEGY, useFactory: menuScrollStrategy, deps: [Overlay] },

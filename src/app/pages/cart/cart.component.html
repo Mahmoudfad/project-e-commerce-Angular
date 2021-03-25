@@ -83,7 +83,7 @@
       <div class="mat-cell">{{(product.price -(product.price * (product.discount/100)))* product.cartCount}}</div>
       <div class="mat-cell text-center">
         <div class="p-1">
-          <button mat-mini-fab color="warn" (click)="remove(product)" matTooltip="Clear">
+          <button mat-mini-fab color="warn" (click)="delete(i)" matTooltip="Clear">
               <mat-icon>close</mat-icon>
           </button>
         </div>

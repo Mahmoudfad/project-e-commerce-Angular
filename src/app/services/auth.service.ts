@@ -14,6 +14,7 @@ export class AuthService {
   // }
    baseURL= environment.baseURL
   constructor(public http:HttpClient) { }
+
   // isLoggedIn() : Observable<boolean> {
   //   return this.isLoginSubject.asObservable();
   //  }
@@ -37,10 +38,7 @@ export class AuthService {
     this.isLoginSubject.next(true); 
     
    }
-   logout() {
-    localStorage.removeItem('token');
-    this.isLoginSubject.next(false);
-  }
+ 
 
  
   // getUsers(data){

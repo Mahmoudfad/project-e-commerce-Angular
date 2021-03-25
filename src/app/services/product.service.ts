@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class ProductService {
   sharedDataComand= []as any
   sharedDataCart=JSON.parse(localStorage.getItem('cart') || '[]')
-
+  // listProductsSubject = new BehaviorSubject<[]>([])
 
    baseURL= environment.baseURL
   constructor(public http:HttpClient) { }
@@ -38,8 +39,13 @@ export class ProductService {
    getAllCategories(){
     return this.http.get( this.baseURL + '/categorie/getAllCategorie')
    }
+   getCategoryByName(name){
+    return this.http.get( this.baseURL + '/categorie/getCategoryByName/'+name)
+   }
 
-   
+   getGenderByName(name){
+    return this.http.get(this.baseURL + '/gender/getGenderByName/'+name)
+   }
 
    getProductById(id){
      return this.http.get(this.baseURL+ '/products/productById/'+id)
@@ -54,4 +60,5 @@ export class ProductService {
           return this.http.post(this.baseURL + '/products/postCmd',data)
 
    }
+ 
 }
