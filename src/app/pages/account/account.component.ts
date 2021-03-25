@@ -23,13 +23,10 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     if(window.innerWidth < 960){
       this.sidenavOpen = false;
-
-      const token = localStorage.getItem('token');
-    this.tokenPayload = decode(token);
-    console.log(this.tokenPayload);
-    
-
     };
+    const token = localStorage.getItem('token');
+    this.tokenPayload = decode(token);
+    console.log(this.tokenPayload.role);
 
   }
 

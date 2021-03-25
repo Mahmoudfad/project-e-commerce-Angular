@@ -45,7 +45,7 @@ onRemove(event) {
           }),
         ])
       });
-this.productService.getAllGender().subscribe((res: any)=>{this.ListGender=res},
+this.productService.getGenderByName(name).subscribe((res: any)=>{this.ListGender=res},
 (erreur:any)=>{},
 ()=>{}
 );

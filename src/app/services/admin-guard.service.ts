@@ -15,14 +15,20 @@ export class AdminGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // this will be passed from the route config
     // on the data property
-    const expectedRole = 'admin';
-    const token = localStorage.getItem('token');
+    const expectedRole = "admin";
+    const token = localStorage.getItem('token') ||'';
     // decode the token to get its payload
     this.tokenPayload = decode(token);
+    console.log(this.tokenPayload);
     
-    if (this.auth.isAuthenticated() &&  this.tokenPayload.role !== expectedRole) {
+    
+    if (!this.auth.isAuthenticated()  ) {
       this.router.navigate(['sign-in']);
-      return false
+      if ( this.tokenPayload.role !== expectedRole){
+        this.router.navigate(['products']);
+        return false
+      }
+    else  return false
     }
     return true;
   }
