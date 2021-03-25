@@ -138,10 +138,14 @@ public getOnSaleProducts():Observable<any[]>{
             let item = this.cartTab.filter(item=>item.id == product._id)[0];
             // item.cartCount = product.cartCount;  
         }
-        else{           
+        else{         
+            this.cartTab= JSON.parse(localStorage.getItem('cart')) || []  
             this.cartTab.push(product);
-            localStorage.setItem('cart', JSON.stringify(this.cartTab))
             this.shoppingCartSubject.next(this.cartTab)
+            localStorage.setItem('cart', JSON.stringify(this.cartTab))
+            
+            console.log(this.shoppingCartSubject.value);
+            
         }      
         console.log(this.cartTab);
           

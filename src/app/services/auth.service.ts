@@ -50,6 +50,7 @@ export class AuthService {
 
   public getToken(): string {
     return JSON.parse(localStorage.getItem('token'))
+    
   }
   // public isAuthenticated(): boolean {
   //   // get the token

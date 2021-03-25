@@ -32,7 +32,7 @@
       <div class="mat-cell"><img [src]="'http://localhost:3000/' + product.imageProduct"></div>
       <div class="mat-cell"><a [routerLink]="['/products', product._id, product.productName]" class="product-name">{{product.productName}}</a></div>
       <div class="mat-cell">${{product.price | number : '1.2-2'}}</div>      
-      <div class="mat-cell">
+      <div class="mat-cell"></div>
        <!-- <button mat-mini-fab color="primary" (click)='increment()'>+</button>
        <span mat-mini-fab color="warn">{{counter}}</span>
        <button mat-mini-fab color="warn" (click)='decrement()'>-</button>       -->
@@ -60,19 +60,19 @@
             <mat-option *ngFor="let element of product.sizesQuantity" (click)="changeSize(element.size,i)" [value]=element.size>{{element.size}}</mat-option>
           
         </mat-select>
-     
+     </div>
       <!-- <div >
         <button mat-button color="primary">{{element.size}}</button>
       </div> -->
      
 
-</div>
+
 <div class="mat-cell" >
   <div *ngIf="product.discount!= null || product.discount!= 0">
-  <span>{{product.price -(product.price * (product.discount/100))}}</span>
+  <span>${{product.price -(product.price * (product.discount/100))}}</span>
 </div>
 <div *ngIf="product.discount== null || product.discount== 0" >
-  <span>{{product.price}}</span>
+  <span>${{product.price}}</span>
 </div>
   </div>
 
@@ -80,7 +80,7 @@
     <span>{{product.discount}} %</span>
     </div>
 
-      <div class="mat-cell">{{(product.price -(product.price * (product.discount/100)))* product.cartCount}}</div>
+      <div class="mat-cell">${{(product.price -(product.price * (product.discount/100)))* product.cartCount}}</div>
       <div class="mat-cell text-center">
         <div class="p-1">
           <button mat-mini-fab color="warn" (click)="delete(i)" matTooltip="Clear">
@@ -103,7 +103,7 @@
       </div>
       <div class="mat-cell">
         <div fxLayout="column" fxLayoutAlign="center start" class="grand-total">
-          <span class="new-price">{{totalCartPrice}} TND</span>
+          <span class="new-price">{{totalCartPrice}} </span>
         </div>
       </div>
       <div class="mat-cell text-center"><a (click)="toCheckOut()" mat-raised-button color="primary">Proceed To Checkout</a></div>

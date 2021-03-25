@@ -2,14 +2,14 @@
     <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="account-sidenav" perfectScrollbar>
         <mat-nav-list class="mat-elevation-z1 h-100">
 
-        
+                        <bdi *ngIf="tokenPayload.role== 'admin'">        
+
             <mat-list-item *ngFor="let link of links"> 
-                <bdi *ngIf="tokenPayload.role== 'admin'">        
                 <mat-icon matListIcon class="mat-icon-sm"  >{{link.icon}}</mat-icon>
                 <a matLine [routerLink]="link.href" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{exact:true}">{{ link.name }}</a>
                 <span matBadge="{{link.nbrNotif}}" ></span>
-            </bdi>
             </mat-list-item>
+            </bdi>
 
             <bdi *ngIf="tokenPayload.role== 'user'">
 <h6>Account settings</h6>            </bdi>
