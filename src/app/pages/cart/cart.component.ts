@@ -52,7 +52,8 @@ totalCartPrice = 0
     // })
 
    this.cartTab= JSON.parse(localStorage.getItem('cart') || '[]')
-   console.log(this.cartTab);
+   this.appService.shoppingCartSubject.next(this.cartTab)
+   console.log(this.appService.shoppingCartSubject.value);
 
    this.cartTab.forEach(product => {
      
@@ -278,15 +279,15 @@ else{
   
   // } 
 delete(i){
-  // const index: number =  this.cartTab.indexOf(product);
-  // console.log(index);
-  // console.log(this.cartTab);
+  
   
   this.cartTab.splice(i, 1);
+  this.appService.shoppingCartSubject.next(this.cartTab)
   console.log(i);
-  
   localStorage.setItem("cart",JSON.stringify(this.cartTab))
- 
+  
+  console.log( this.appService.shoppingCartSubject.value);
+  
 }
 
   toCheckOut (){

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import decode from 'jwt-decode';
-
+import{AuthService} from 'src/app/services/auth.service'
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -18,7 +18,7 @@ export class AccountComponent implements OnInit {
     { name: 'Order History', href: 'orders', icon: 'add_shopping_cart'},  
     { name: 'Logout', href: '/sign-in', icon: 'power_settings_new'},    
   ];
-  constructor(public router:Router) { }
+  constructor(public router:Router , private AuthService:AuthService) { }
    tokenPayload : any
   ngOnInit() {
     if(window.innerWidth < 960){

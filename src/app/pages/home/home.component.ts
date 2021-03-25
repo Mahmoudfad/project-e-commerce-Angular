@@ -38,10 +38,10 @@ export class HomeComponent implements OnInit {
   public onLinkClick(e){
     
     console.log(e.index);
-    if (e.index==1){
+    if (e.index==0){
       this.getOnSaleProducts();
     }
-    else if(e.index==2){
+    else if(e.index==1){
     this.getTopProducts();
   }
   }
