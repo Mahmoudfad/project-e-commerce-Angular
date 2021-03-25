@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     const expectedRole = "user";
     const token = localStorage.getItem('token');
     
-    if (this.auth.isAuthenticated()) {
+    if (this.auth.isAuthenticated() == true) {
       this.router.navigate(['sign-in']);
       return false
     }
