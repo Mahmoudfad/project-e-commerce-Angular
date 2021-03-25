@@ -32,9 +32,9 @@ export class TopMenuComponent implements OnInit {
   ngOnInit() {
     this.currency = this.currencies[0];
     this.flag = this.flags[0];    
-   
-    this.isLoggedIn =JSON.parse(localStorage.getItem("isLogin")) 
-
+    this.authService.isLoginSubject.next(this.isLoggedIn =JSON.parse(localStorage.getItem("isLogin")))
+   console.log( this.isLoggedIn =JSON.parse(localStorage.getItem("isLogin")) )
+    console.log(this.authService.isLoginSubject.value);
     
   }
 
