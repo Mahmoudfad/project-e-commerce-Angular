@@ -81,6 +81,7 @@ export class ProductsComponent implements OnInit {
 isConnected :any
 category:any
   ngOnInit() {
+
     console.log(this.authService.getToken());
      
     this.categorie = this.activatedRoute.snapshot.paramMap.get('categorie')

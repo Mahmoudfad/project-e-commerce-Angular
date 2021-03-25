@@ -19,10 +19,10 @@ export class AdminGuardService implements CanActivate {
     const token = localStorage.getItem('token') ||'';
     // decode the token to get its payload
     this.tokenPayload = decode(token);
-    console.log(this.tokenPayload);
+    console.log(this.tokenPayload.role);
     
     
-    if (!this.auth.isAuthenticated()  ) {
+    if (this.auth.isAuthenticated() == true ) {
       this.router.navigate(['sign-in']);
       if ( this.tokenPayload.role !== expectedRole){
         this.router.navigate(['products']);
