@@ -60,6 +60,7 @@ MatButtonModule,
     BreadcrumbComponent,
     OptionsComponent,
     FooterComponent,
+    
   ], 
   providers: [
     AppSettings,

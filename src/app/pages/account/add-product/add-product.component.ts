@@ -32,7 +32,7 @@ onRemove(event) {
       
         productName : new FormControl('', Validators.required),
         gender : new FormControl('', Validators.required),
-        categorie :new FormControl('', Validators.required),
+        categorie :new FormControl(''),
         topProduct :new FormControl('', Validators.required),
         description :new FormControl('', Validators.required),
         price : new FormControl('', Validators.required),
@@ -81,7 +81,7 @@ a = 0
   
     formData.set('productName', this.productForm.get('productName').value);
     formData.set('gender', this.productForm.get('gender').value);
-    formData.set('categorie', this.productForm.get('categorie').value);
+    // formData.set('categorie', this.productForm.get('categorie').value);
     formData.set('topProduct', this.productForm.get('topProduct').value);
     formData.set('description', this.productForm.get('description').value);
     formData.set('price', this.productForm.get('price').value);

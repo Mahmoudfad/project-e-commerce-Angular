@@ -83,7 +83,7 @@
                                 <div class="divider mt-1"></div>
                                 <div *ngIf="cartTab.length == 0" class="py-1 text-muted text-center">You have no items in your shopping cart.</div>
                                 <mat-list>
-                                    <mat-list-item *ngFor="let product of cartTab">                                   
+                                    <mat-list-item *ngFor="let product of appService.shoppingCartSubject.value">                                   
                                         <h3 matLine class="text-muted"> {{product?.productName}} </h3>
                                         <p matLine class="text-muted">
                                             <bdi>{{product?.cartCount}} x ${{product?.price | number : '1.2-2'}}</bdi>
@@ -106,7 +106,7 @@
                                         <button mat-mini-fab color="warn" (click)="clear();stopClickPropagate($event)" matTooltip="Clear All" matTooltipPosition="after">
                                             <mat-icon>remove_shopping_cart</mat-icon>
                                         </button>
-                                        <a [routerLink]="['/checkout']" mat-mini-fab color="primary" matTooltip="Checkout" matTooltipPosition="before">
+                                        <a [routerLink]="['/cart']" mat-mini-fab color="primary" matTooltip="Checkout" matTooltipPosition="before">
                                             <mat-icon>check</mat-icon>
                                         </a>
                                     </div>
