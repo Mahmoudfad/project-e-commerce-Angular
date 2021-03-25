@@ -39,8 +39,13 @@ export class ProductService {
    getAllCategories(){
     return this.http.get( this.baseURL + '/categorie/getAllCategorie')
    }
+   getCategoryByName(name){
+    return this.http.get( this.baseURL + '/categorie/getCategoryByName/'+name)
+   }
 
-   
+   getGenderByName(name){
+    return this.http.get(this.baseURL + '/gender/getGenderByName/'+name)
+   }
 
    getProductById(id){
      return this.http.get(this.baseURL+ '/products/productById/'+id)
@@ -55,4 +60,5 @@ export class ProductService {
           return this.http.post(this.baseURL + '/products/postCmd',data)
 
    }
+ 
 }

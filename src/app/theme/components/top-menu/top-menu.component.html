@@ -29,7 +29,7 @@
         <a mat-button routerLink="/wishlist">Wishlist <span *ngIf="settings.rtl">&rlm;</span>({{appService.Data.wishList.length}})</a>
     </span>  
    
-        <span *ngIf="!authService.isLoginSubject.value">
+        <span *ngIf="authService.isLoginSubject.value == false">
             <a mat-button routerLink="/sign-in"> <span (click)="authService.login()"></span>sign in</a>
         </span>
   
@@ -67,7 +67,7 @@
                 <span>Help</span> 
             </a>
             <div class="divider"></div>
-            <a mat-menu-item routerLink="/sign-in" (click)="authService.logout()"> 
+            <a mat-menu-item routerLink="/sign-in" (click)="logout()"> 
                 <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
                 <span>Sign Out</span> 
             </a>

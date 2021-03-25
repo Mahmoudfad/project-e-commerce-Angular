@@ -13,6 +13,7 @@ export class AddProductComponent implements OnInit {
   productForm:FormGroup;
   file;
   ListCategories=[] as any;
+  ListGender=[] as any;
   constructor(private productService: ProductService,private router: Router) { }
 files: File[] = [];
 
@@ -44,7 +45,10 @@ onRemove(event) {
           }),
         ])
       });
-
+this.productService.getAllGender().subscribe((res: any)=>{this.ListGender=res},
+(erreur:any)=>{},
+()=>{}
+);
 
       this.productService.getAllCategories().subscribe((res: any)=>{this.ListCategories=res},
 (erreur:any)=>{},
