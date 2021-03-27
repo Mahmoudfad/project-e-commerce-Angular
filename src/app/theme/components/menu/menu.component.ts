@@ -7,30 +7,22 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  ListMens=[] as any;
+  ListProducts=[] as any;
   ListWomens=[] as any;
   ListCategories=[] as any;
   constructor(private productService: ProductService) { }
 
   ngOnInit() { 
-this.productService.getAllCategories().subscribe((res: any)=>{this.ListCategories=res},
-(erreur:any)=>{},
-()=>{}
-);
-  
-
-//     this.productService.getMensProduct().subscribe((res: any)=>{this.ListMens=JSON.parse(JSON.stringify(res))},
-// (erreur:any)=>{},
-// ()=>{
-
-  
-// }
-// );
-
-// this.productService.getWomensProduct().subscribe((res: any)=>{this.ListWomens=res},
+// this.productService.getAllCategories().subscribe((res: any)=>{this.ListCategories=res},
 // (erreur:any)=>{},
 // ()=>{}
 // );
+  
+
+this.productService.getAllProducts().subscribe((res: any)=>{this.ListProducts=res},
+(erreur:any)=>{},
+()=>{}
+);
 
   }
 
