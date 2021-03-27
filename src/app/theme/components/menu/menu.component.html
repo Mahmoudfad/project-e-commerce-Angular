@@ -6,19 +6,26 @@
             <div fxFlex="20" fxLayout="column" class="p-1"> 
                 <a mat-menu-item routerLink="/products/female"><b>WOMEN</b></a>
                 <mat-divider></mat-divider> 
-                <div *ngFor =" let cat of ListCategories">
-                    <a mat-menu-item routerLink="/products/female/{{cat._id}}">{{cat.categorie}}</a>
-                    
-                </div>
+                <a mat-menu-item routerLink="/products/female/sneakers">Sneakers</a>
+                <a mat-menu-item routerLink="/products/female/sandals">Sandals</a>
+                <a mat-menu-item routerLink="/products/female/casual">Casual shoes</a>
+                <a mat-menu-item routerLink="/products/female/boots">Boots</a>
+                <a mat-menu-item routerLink="/products/female/running">Running</a>
+                <a mat-menu-item routerLink="/products/female/basket">Basket</a>
+                
                          
             </div>
             <div fxFlex="20" class="p-1"> 
                 <a mat-menu-item routerLink="/products/male"><b>MEN</b></a>
                 <mat-divider></mat-divider> 
-                <div *ngFor =" let cat of ListCategories">
-                    <a mat-menu-item routerLink="/products/male/{{cat._id}}">{{cat.categorie}}</a>
+                    <a mat-menu-item routerLink="/products/male/sneakers">Sneakers</a>
+                    <a mat-menu-item routerLink="/products/male/sandals">Sandals</a>
+                    <a mat-menu-item routerLink="/products/male/casual">Casual shoes</a>
+                    <a mat-menu-item routerLink="/products/male/boots">Boots</a>
+                    <a mat-menu-item routerLink="/products/male/running">Running</a>
+                    <a mat-menu-item routerLink="/products/male/basket">Basket</a>
                     
-                </div>
+                
             </div>
             <!-- <div fxFlex="20" class="p-1"> 
                 <a mat-menu-item routerLink="/"><b>KIDS</b></a>

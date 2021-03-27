@@ -46,9 +46,9 @@ export class AuthService {
   // }
 
   public getToken(): string {
-    return JSON.parse(localStorage.getItem('token')).token
+    return JSON.parse(localStorage.getItem('token'))
   }
-  // public isAuthenticated(): boolean {
+  // public isAuthenticated(): boolean 
   //   // get the token
   //   const token = this.getToken();
   //   // return a boolean reflecting 
