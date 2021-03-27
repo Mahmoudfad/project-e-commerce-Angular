@@ -37,13 +37,6 @@ totalCartPrice = 0
 
   enabledQuantity = false
   ngOnInit() {
-
-
-  
-
-
-
-
     // .forEach(product=>{
     //   this.total[product.id] = product.cartCount*product.newPrice;
     //   this.grandTotal += product.cartCount*product.newPrice;
@@ -60,10 +53,6 @@ totalCartPrice = 0
     this.totalCartPrice=this.totalCartPrice+(product.price -(product.price * (product.discount/100)))* product.cartCount
      
    });
-
-
-   
-
   }
 
 
