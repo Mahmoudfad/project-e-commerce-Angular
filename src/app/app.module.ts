@@ -30,7 +30,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { TokenInterceptor } from './services/token-interceptor.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
    imports: [
@@ -46,7 +46,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 MatButtonModule,
     
     SharedModule,
-    
+    ModalModule,
     FormsModule, ReactiveFormsModule,
     routing
   ],

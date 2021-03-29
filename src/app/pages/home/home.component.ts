@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     // this.getBanners();
     // this.getProducts("featured");
     // this.getBrands();
+   
     
   }
 

@@ -21,6 +21,7 @@ categorieSubject =new BehaviorSubject<string>(null);
 genderSubject = new BehaviorSubject<string>(null);
 topProductSubject= new BehaviorSubject<string>(null);
 shoppingCartSubject = new BehaviorSubject<[]>([]);
+totalSubject = new BehaviorSubject<number>(null);
     public Data = new Data(
         [], // categories
         [], // compareList
