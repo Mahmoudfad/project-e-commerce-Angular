@@ -34,16 +34,12 @@ export class CartComponent implements OnInit {
 
   productPrice=0
 totalCartPrice = 0
-
+productWithoutDiscount:any;
+productWithDiscount:any;
   enabledQuantity = false
   ngOnInit() {
-
-
-  
-
-
-
-
+    console.log("cart");
+    
     // .forEach(product=>{
     //   this.total[product.id] = product.cartCount*product.newPrice;
     //   this.grandTotal += product.cartCount*product.newPrice;
@@ -55,15 +51,45 @@ totalCartPrice = 0
    this.appService.shoppingCartSubject.next(this.cartTab)
    console.log(this.appService.shoppingCartSubject.value);
 
-   this.cartTab.forEach(product => {
-     
-    this.totalCartPrice=this.totalCartPrice+(product.price -(product.price * (product.discount/100)))* product.cartCount
-     
-   });
-
-
    
+    //  this.productWithoutDiscount=this.cartTab.find(element=>element.discount==null || element.discount==0 )
+    //  this.productWithDiscount = this.cartTab.find(element =>element.discount !=null )
+    //  console.log(this.productWithDiscount);
+     
+    //  console.log(this.productWithoutDiscount);
+    //  console.log(this.productWithoutDiscount.price);
+    //  console.log(product.cartCount);
+     
+    //  if(this.productWithoutDiscount == true && this.productWithDiscount == true){
 
+    //    this.totalCartPrice=this.totalCartPrice+((product.price -(product.price * (product.discount/100)))* product.cartCount)
+    //    +((this.productWithoutDiscount.price * product.cartCount))
+
+
+    //    console.log(this.totalCartPrice);
+    //    console.log( product.cartCount);
+       
+    //  }
+    //  else if (this.productWithoutDiscount == false && this.productWithDiscount == true){
+    // this.totalCartPrice=this.totalCartPrice+(product.price -(product.price * (product.discount/100)))* product.cartCount
+    //  console.log('aa');
+    //  }
+    //  else if(this.productWithoutDiscount == true && this.productWithDiscount == false){
+    //    this.totalCartPrice= this.totalCartPrice+((this.productWithoutDiscount.price * product.cartCount))
+    //  }
+    this.cartTab.forEach(product => {
+      product.cartCount=1
+    if (product.discount == 0 || product.discount == null) {
+      this.totalCartPrice = this.totalCartPrice+ (product.price*product.cartCount)
+      this.appService.totalSubject.next(this.totalCartPrice)
+    }
+    else if (product.discount != 0 || product.discount !== null){
+      this.totalCartPrice = this.totalCartPrice+ (product.price -(product.price*(product.discount/100))*product.cartCount)
+      this.appService.totalSubject.next(this.totalCartPrice)
+    }
+
+
+   });
   }
 
 
@@ -81,8 +107,7 @@ localStorage.setItem('cart',JSON.stringify(this.cartTab))
  
   public increment(i,product){
 
-    console.log(product);
-    console.log(i);
+ 
     
 if (this.cartTab[i].cartCount == null ) {
         this.cartTab[i].cartCount=1
@@ -116,9 +141,10 @@ else{
         
         if (product.seletedSize!=0) {
            this.elementFound = product.sizesQuantity.find(element=>element.size ==product.selectedSize)
-          console.log(this.elementFound);
-          console.log(product.sizesQuantity);
-          
+     console.log("element found");
+     
+           console.log(this.elementFound);
+      
                 if (this.elementFound.quantity>=  this.cartTab[i].cartCount) {
                    localStorage.setItem('cart',JSON.stringify(this.cartTab))
                    console.log(product.selectedSize , this.elementFound.quantity);     
@@ -269,15 +295,18 @@ else{
   //   }     
   // }
 
-  // public clear(){
-  //   this.appService.Data.cartList.forEach(product=>{
-  //     this.appService.resetProductCartCount(product);
-  //   });
-  //   this.appService.Data.cartList.length = 0;
-  //   this.appService.Data.totalPrice = 0;
-  //   this.appService.Data.totalCartCount = 0;
-  
-  // } 
+  clear(){
+    // this.appService.Data.cartList.forEach(product=>{
+    //   this.appService.resetProductCartCount(product);
+    // });
+    // this.appService.Data.cartList.length = 0;
+    // this.appService.Data.totalPrice = 0;
+    // this.appService.Data.totalCartCount = 0;
+    localStorage.removeItem("cart");
+    // localStorage.setItem("cart",JSON.stringify(this.cartTab))
+    this.appService.shoppingCartSubject.next(this.cartTab)
+    this.ngOnInit();
+  } 
 delete(i){
   
   
