@@ -58,6 +58,8 @@ public getOnSaleProducts():Observable<any[]>{
         return this.http.get(this.baseURL + '/products/getAllProducts')
 
     }
+
+    
     public deleteProduct(id){
         return this.http.delete(this.baseURL+'/products/deleteProduct/'+id)
     }
