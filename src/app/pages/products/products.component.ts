@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 import { ProductService } from 'src/app/services/product.service';
 import { AuthService } from 'src/app/services/auth.service';
 
+
+import decode from 'jwt-decode';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -71,7 +73,8 @@ export class ProductsComponent implements OnInit {
     private ProductService: ProductService,
     public dialog: MatDialog,
     private router: Router,
-    private authService : AuthService) {
+    private authService : AuthService,
+    ) {
     this.settings = this.appSettings.settings;
   }
 
@@ -80,6 +83,7 @@ export class ProductsComponent implements OnInit {
   gender;
 isConnected :any
 category:any
+
   ngOnInit() {
 
     console.log(this.authService.getToken());

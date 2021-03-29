@@ -14,27 +14,24 @@ import decode from 'jwt-decode';
 export class InformationComponent implements OnInit {
   infoForm: FormGroup;
   passwordForm: FormGroup;
-  userFound
+  userFound : any
   constructor(public formBuilder: FormBuilder, public snackBar: MatSnackBar ,public authService : AuthService) { }
   tokenPayload
+
+
   ngOnInit() {
 
-    const token = localStorage.getItem('token');
+    const token = JSON.parse(JSON.stringify(localStorage.getItem('token'))) 
     this.tokenPayload = decode(token);
-    console.log(this.tokenPayload);
-this.authService.getUser(this.tokenPayload.userId).subscribe((res: any)=>{this.userFound=res;
-console.log(res);
-},
-(erreur:any)=>{},
- ()=>
-  {
-    console.log("finished");
-    console.log(this.userFound.name);
-    
-  } 
+    console.log(typeof(this.tokenPayload.userId));
+const userId = this.tokenPayload.userId
+console.log(userId);
 
-);
-    
+this.authService.getUser('605b93132b7c322a10878e91').subscribe((res: any) => { this.userFound = res },
+(erreur: any) => { },
+() => {}
+)
+
 console.log(this.userFound);
     
 
@@ -49,10 +46,16 @@ console.log(this.userFound);
       'newPassword': ['', Validators.required],
       'confirmNewPassword': ['', Validators.required]
     },{validator: matchingPasswords('newPassword', 'confirmNewPassword')});
+
   }
 
-  public onInfoFormSubmit(values:Object):void {
+
+
+
+  public onInfoFormSubmit(userId,values:Object):void {
     if (this.infoForm.valid) {
+      this.authService.updateUser(userId,values).subscribe((res:any)=>{console.log(res);
+      })
       this.snackBar.open('Your account information updated successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
     }
   }
