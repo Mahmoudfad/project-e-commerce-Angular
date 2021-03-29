@@ -51,7 +51,7 @@ productWithDiscount:any;
    this.appService.shoppingCartSubject.next(this.cartTab)
    console.log(this.appService.shoppingCartSubject.value);
 
-   this.cartTab.forEach(product => {
+   
     //  this.productWithoutDiscount=this.cartTab.find(element=>element.discount==null || element.discount==0 )
     //  this.productWithDiscount = this.cartTab.find(element =>element.discount !=null )
     //  console.log(this.productWithDiscount);
@@ -77,7 +77,8 @@ productWithDiscount:any;
     //  else if(this.productWithoutDiscount == true && this.productWithDiscount == false){
     //    this.totalCartPrice= this.totalCartPrice+((this.productWithoutDiscount.price * product.cartCount))
     //  }
-
+    this.cartTab.forEach(product => {
+      product.cartCount=1
     if (product.discount == 0 || product.discount == null) {
       this.totalCartPrice = this.totalCartPrice+ (product.price*product.cartCount)
       this.appService.totalSubject.next(this.totalCartPrice)
