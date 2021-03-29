@@ -48,6 +48,8 @@ export class AuthService {
   public getToken(): string {
     return JSON.parse(localStorage.getItem('token'))
   }
+  // public isAuthenticated(): boolean {
+  //   // get the token 
   // public isAuthenticated(): boolean 
   //   // get the token
   //   const token = this.getToken();
@@ -66,17 +68,18 @@ export class AuthService {
     return token == null ;
   }
 
-
-
-
-
   getUser(id)
   {
+
+    
      return this.http.get(this.baseURL + '/users/getUser/'+ id)
   }
 
 
+  updateUser(userId,form){
+    return this.http.put(this.baseURL + '/users/updateUser/'+ userId,form)
 
+  }
 
 
 

@@ -60,5 +60,4 @@ export class ProductService {
           return this.http.post(this.baseURL + '/products/postCmd',data)
 
    }
- 
 }

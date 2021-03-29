@@ -16,20 +16,21 @@ export class AdminGuardService implements CanActivate {
     // this will be passed from the route config
     // on the data property
     const expectedRole = "admin";
-    const token = localStorage.getItem('token') ||'';
+    const token = JSON.parse(JSON.stringify(localStorage.getItem('token'))) 
     // decode the token to get its payload
     this.tokenPayload = decode(token);
     console.log(this.tokenPayload.role);
     
     
-    if (this.auth.isAuthenticated() == true ) {
+    if (token == null || token == undefined || token =="") {
       this.router.navigate(['sign-in']);
-      if ( this.tokenPayload.role !== expectedRole){
+      return false
+      }
+
+    else if (this.tokenPayload.role !== expectedRole){
         this.router.navigate(['products']);
         return false
       }
-    else  return false
-    }
     return true;
   }
 }
