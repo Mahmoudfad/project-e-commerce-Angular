@@ -50,6 +50,8 @@ export class AuthService {
   }
   // public isAuthenticated(): boolean {
   //   // get the token 
+  // public isAuthenticated(): boolean 
+  //   // get the token
   //   const token = this.getToken();
   //   // return a boolean reflecting 
   //   // whether or not the token is expired

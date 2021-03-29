@@ -258,20 +258,36 @@ category:any
   }
 
   public onChangeCategory(event) {
-  console.log(event.target.innerText.toLowerCase());
+
+    if (event.target) {
+      console.log(event.target.innerText.toLowerCase());
+      this.appService.categorieSubject.next(event.target.innerText)
+      // this.router.navigate(['/products', event.target.innerText.toLowerCase()]);
+      this.getProductByCategory(this.categories)
+
+      this.appService.genderSubject.next(event.target.innerText.toLowerCase())
+      this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
+      this.getProductByGender(this.appService.genderSubject.value)
+      this.getProductByCategory(this.appService.categorieSubject.value)
+
+    }
+  // console.log(event.target.innerText.toLowerCase());
   
     
-    if (event.target) {
-     this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
-     this.categorie= this.appService.categorieSubject.value
+  //   if (event.target) {
+  //    this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
+  //    this.categorie= this.appService.categorieSubject.value
    
      
-     this.ProductService.getCategoryByName(this.categorie).subscribe((res:any)=>{
-       this.category=res
-     })
-     this.ProductService.getGenderByName(this.categorie).subscribe((res:any)=>{
-      this.category=res
-    })
+  //    this.ProductService.getCategoryByName(this.categorie).subscribe((res:any)=>{
+  //      this.category=res
+  //    })
+  //    this.ProductService.getGenderByName(this.categorie).subscribe((res:any)=>{
+  //     this.category=res
+  //   })
+
+
+
     //  this.appService.getProductByCategoryAndGender(this.gender,this.categorie ).subscribe(
     //    res=>{
     //      console.log("res");
@@ -281,7 +297,7 @@ category:any
     //     this.products = res}, err=>{console.log(err);
     //    }
     //  )
-    }
+    // }
   }
 
 }

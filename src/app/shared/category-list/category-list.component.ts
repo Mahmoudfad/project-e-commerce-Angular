@@ -28,10 +28,10 @@ export class CategoryListComponent implements OnInit {
 ()=>{}
 );
   }
-  navigation(gender,categorie){
-    this.router.navigateByUrl('products/'+gender+'/'+categorie)
+  // navigation(gender,categorie){
+  //   this.router.navigateByUrl('products/'+gender+'/'+categorie)
     
-  }
+  // }
 
   public ngDoCheck() {
     if(this.categories && !this.mainCategories) {
@@ -47,32 +47,32 @@ export class CategoryListComponent implements OnInit {
       event.preventDefault();
     }    
   }
-  // public getProductByGender (gender){
-  //   this.appService.getProductByGender(gender).subscribe(data => {
-  //     this.products = data;
-  //     // this.appService.categorieSubject.value = data;
-  //     // this.appService.Data.categories = data;
-  //   });
-  // }
-  // public getProductByCategory(category) {
-  //   this.appService.getProductByCategory(category).subscribe(data => { 
-  //     this.products = data;
-  //     // this.appService.categorieSubject.value = data;
-  //     // this.appService.Data.categories = data;
-  //   });
-  //   // this.appService.getCategorie().subscribe(data => {
-  //   //   console.log(data);
-  //   // });
-  //   // this.appService.getGender().subscribe(data => {
-  //   //   console.log(data);
-  //   // });
-  // }
+  public getProductByGender (gender){
+    this.appService.getProductByGender(gender).subscribe(data => {
+      this.products = data;
+      // this.appService.categorieSubject.value = data;
+      // this.appService.Data.categories = data;
+    });
+  }
+  public getProductByCategory(category) {
+    this.appService.getProductByCategory(category).subscribe(data => { 
+      this.products = data;
+      // this.appService.categorieSubject.value = data;
+      // this.appService.Data.categories = data;
+    });
+    // this.appService.getCategorie().subscribe(data => {
+    //   console.log(data);
+    // });
+    // this.appService.getGender().subscribe(data => {
+    //   console.log(data);
+    // });
+  }
 
   public changeCategory(event){
     // this.appService.genderSubject.next(event.target.innerText.toLowerCase())
-    // this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
+    this.appService.categorieSubject.next(event.target.innerText.toLowerCase())
     // this.getProductByGender(this.appService.genderSubject.value)
-    // this.getProductByCategory(this.appService.categorieSubject.value)
+    this.getProductByCategory(this.appService.categorieSubject.value)
     
     this.change.emit(event);
   }
