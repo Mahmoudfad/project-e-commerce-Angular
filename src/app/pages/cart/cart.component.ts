@@ -78,7 +78,8 @@ productWithDiscount:any;
     //    this.totalCartPrice= this.totalCartPrice+((this.productWithoutDiscount.price * product.cartCount))
     //  }
     this.cartTab.forEach(product => {
-      product.cartCount=1
+      console.log(product.cartCount);
+      
     if (product.discount == 0 || product.discount == null) {
       this.totalCartPrice = this.totalCartPrice+ (product.price*product.cartCount)
       this.appService.totalSubject.next(this.totalCartPrice)
@@ -109,7 +110,7 @@ localStorage.setItem('cart',JSON.stringify(this.cartTab))
 
  
     
-if (this.cartTab[i].cartCount == null ) {
+if (this.cartTab[i].cartCount == 1  ) {
         this.cartTab[i].cartCount=1
         this.cartTab[i].cartCount+=1
 
@@ -119,7 +120,7 @@ if (this.cartTab[i].cartCount == null ) {
         if (elementFound.quantity>= product.cartCount) {
            localStorage.setItem('cart',JSON.stringify(this.cartTab))
            this.alertEx=false
-
+          // this.appService.totalSubject.next(this.totalCartPrice)
          }
          else{
          this.messageQuantity="The selected quantity is not available in the stock"
@@ -149,7 +150,7 @@ else{
                    localStorage.setItem('cart',JSON.stringify(this.cartTab))
                    console.log(product.selectedSize , this.elementFound.quantity);     
                    this.alertEx=false
-             
+                   this.appService.totalSubject.next(this.totalCartPrice)
                  }
 
 
@@ -169,6 +170,30 @@ else{
 
       console.log(product.selectedSize);
       
+     // this.cartTab.forEach(product => {
+        console.log(product.cartCount);
+        
+        if (this.cartTab[i].discount == 0 || this.cartTab[i].discount == null) {
+          console.log('e');
+          
+          this.totalCartPrice+=this.cartTab[i].price 
+        
+          this.appService.totalSubject.next(this.totalCartPrice)
+        }
+        else if (this.cartTab[i].discount != 0 || this.cartTab[i].discount !== null){
+          console.log(this.totalCartPrice);
+          
+          console.log();
+          
+          this.totalCartPrice+=( ( (this.cartTab[i].price - (this.cartTab[i].price*(this.cartTab[i].discount/100)))) )
+          //this.totalCartPrice = this.totalCartPrice+ ( (this.cartTab[i].price + (this.cartTab[i].price - (this.cartTab[i].price*(this.cartTab[i].discount/100))*this.cartTab[i].cartCount)) )
+          this.appService.totalSubject.next(this.totalCartPrice)
+        }
+  
+  
+    // });
+      
+
     }
         
 
@@ -182,10 +207,10 @@ else{
     console.log(product);
     console.log(i);
     
-if (this.cartTab[i].cartCount == null ) {
+if (this.cartTab[i].cartCount == 1 ) {
         this.cartTab[i].cartCount=1
         this.cartTab[i].cartCount-=1
-
+        
    if (product.selectedSize!=0) {
   let elementFound = product.sizesQuantity.find(element=>element.size == product.selectedSize)
   
@@ -221,6 +246,22 @@ else{
                    localStorage.setItem('cart',JSON.stringify(this.cartTab))
                    console.log(product.selectedSize , this.elementFound.quantity); 
                    this.alertEx=false
+                   if (this.cartTab[i].discount == 0 || this.cartTab[i].discount == null) {
+                    console.log('e');
+                    
+                    this.totalCartPrice-=this.cartTab[i].price 
+                  
+                    this.appService.totalSubject.next(this.totalCartPrice)
+                  }
+                  else if (this.cartTab[i].discount != 0 || this.cartTab[i].discount !== null){
+                    console.log(this.totalCartPrice);
+                    
+                    console.log();
+                    
+                    this.totalCartPrice-=( ( (this.cartTab[i].price - (this.cartTab[i].price*(this.cartTab[i].discount/100)))) )
+                    //this.totalCartPrice = this.totalCartPrice+ ( (this.cartTab[i].price + (this.cartTab[i].price - (this.cartTab[i].price*(this.cartTab[i].discount/100))*this.cartTab[i].cartCount)) )
+                    this.appService.totalSubject.next(this.totalCartPrice)
+                  }
                  
                  }
 
@@ -235,11 +276,14 @@ else{
           this.messageQuantity="Select a size before"
           this.alertEx=true
           console.log(this.messageQuantity);
+          
         }
       }
 
       console.log(product.selectedSize);
       
+      
+
     }
   
 
@@ -308,7 +352,18 @@ else{
     this.ngOnInit();
   } 
 delete(i){
-  
+  if (this.cartTab[i].discount == 0 || this.cartTab[i].discount == null) {
+    console.log('e');
+    
+    this.totalCartPrice = this.totalCartPrice- (this.cartTab[i].price*this.cartTab[i].cartCount)
+    this.appService.totalSubject.next(this.totalCartPrice)
+  }
+  else if (this.cartTab[i].discount != 0 || this.cartTab[i].discount !== null){
+    //console.log((product.price -(product.price*(product.discount/100))*this.cartTab[i].product.cartCount));
+    
+    this.totalCartPrice = this.totalCartPrice- (this.cartTab[i].price -(this.cartTab[i].price*(this.cartTab[i].discount/100))*this.cartTab[i].cartCount)
+    this.appService.totalSubject.next(this.totalCartPrice)
+  }
   
   this.cartTab.splice(i, 1);
   this.appService.shoppingCartSubject.next(this.cartTab)
@@ -316,6 +371,13 @@ delete(i){
   localStorage.setItem("cart",JSON.stringify(this.cartTab))
   
   console.log( this.appService.shoppingCartSubject.value);
+ // this.cartTab.forEach(product => {
+    //console.log(product.discount);
+    
+  
+
+
+ //});
   
 }
 

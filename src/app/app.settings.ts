@@ -9,7 +9,7 @@ export class Settings {
 @Injectable()
 export class AppSettings {
     public settings = new Settings(
-        'Emporium',  // theme name
+        'My Shoes',  // theme name
         'black',     // green, blue, red, pink, purple, grey
         false       // true = rtl, false = ltr
     )
