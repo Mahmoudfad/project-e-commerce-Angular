@@ -39,7 +39,7 @@ constructor(public appService:AppService, public formBuilder: FormBuilder , publ
     console.log(this.cartTab);
     this.productService.sharedDataComand
  
-    
+    console.log(this.appService.totalSubject.value);
     
   
     
